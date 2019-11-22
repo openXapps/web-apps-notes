@@ -2,7 +2,9 @@
   "name": "web-apps-notes",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://www.openapps.co.za/apps/web-apps-notes",
   "dependencies": {
+    "mdbreact": "^4.22.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.2.0"
