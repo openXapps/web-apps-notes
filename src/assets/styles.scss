@@ -1,0 +1,64 @@
+// Custom BS4 variables
+
+$_primary:     #6699cc;
+$_secondary:   #3973ac;
+$_success:     #2eb82e;
+$_info:        #e6e600;
+$_warning:     #e66800;
+$_danger:      #e60000;
+$_light:       #ecf2f9;
+$_dark:        #204060;
+$_white:       #ffffff;
+$_black:       #000000;
+
+$primary:       $_primary;
+$secondary:     $_secondary;
+$success:       $_success;
+$info:          $_info;
+$warning:       $_warning;
+$danger:        $_danger;
+$light:         $_light;
+$dark:          $_dark;
+$white:         $_white;
+$black:         $_black;
+
+// $theme-colors: (
+
+// );
+
+$body-bg:       $dark;
+$body-color:    $light;
+
+// Dropdowns
+
+// $dropdown-min-width:                10rem !default;
+$dropdown-padding-y:                0px;
+// $dropdown-spacer:                   .125rem !default;
+// $dropdown-font-size:                $font-size-base !default;
+// $dropdown-color:                    $body-color !default;
+$dropdown-bg:                       $primary;
+// $dropdown-border-color:             rgba($black, .15) !default;
+// $dropdown-border-radius:            $border-radius !default;
+// $dropdown-border-width:             $border-width !default;
+// $dropdown-inner-border-radius:      calc(#{$dropdown-border-radius} - #{$dropdown-border-width}) !default;
+// $dropdown-divider-bg:               $gray-200 !default;
+// $dropdown-divider-margin-y:         $nav-divider-margin-y !default;
+// $dropdown-box-shadow:               0 .5rem 1rem rgba($black, .175) !default;
+// $dropdown-link-color:               $gray-900 !default;
+// $dropdown-link-hover-color:         darken($gray-900, 5%) !default;
+$dropdown-link-hover-bg:            $secondary;
+// $dropdown-link-active-color:        $component-active-color !default;
+// $dropdown-link-active-bg:           $component-active-bg !default;
+// $dropdown-link-disabled-color:      $gray-600 !default;
+// $dropdown-item-padding-y:           .25rem !default;
+// $dropdown-item-padding-x:           1.5rem !default;
+// $dropdown-header-color:             $gray-600 !default;
+
+// Forms
+
+$input-bg:                          $primary;
+$input-color:                       $light;
+
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+// Custom App CSS

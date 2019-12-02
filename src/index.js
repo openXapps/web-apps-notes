@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// https://mdbootstrap.com/docs/react/getting-started/quick-start/
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './assets/styles.scss';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -13,3 +10,4 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
