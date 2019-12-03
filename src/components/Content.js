@@ -11,7 +11,8 @@ const Content = () => {
     <div className="container-fluid">
       <div className="mt-3 w-100 border" style={{ height: '85vh' }}>
         <textarea
-          className="w-100 h-100 border-0"
+          style={{ resize: "vertica" }}
+          className="w-100 h-100 border-0 p-2"
           defaultValue={text}
           onChange={onTextChange}
         ></textarea>
