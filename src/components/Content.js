@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 
 const Content = () => {
   const [text, setText] = React.useState('Hello World');
@@ -9,7 +10,7 @@ const Content = () => {
 
   return (
     <div className="container-fluid">
-      <div className="mt-3 w-100 border" style={{ height: '85vh' }}>
+      <div className="mt-3 w-100 border" style={{ height: '82vh' }}>
         <textarea
           style={{ resize: "vertica" }}
           className="w-100 h-100 border-0 p-2"
@@ -17,13 +18,7 @@ const Content = () => {
           onChange={onTextChange}
         ></textarea>
       </div>
-      <div className="fixed-bottom border">
-        <div className="d-flex flex-row justify-content-between bg-primary text-dark">
-          <div className="p-2">length {text.length}</div>
-          <div className="p-2">length {text.length}</div>
-          <div className="p-2">length {text.length}</div>
-        </div>
-      </div>
+      <Footer text={text} />
     </div>
   );
 };
