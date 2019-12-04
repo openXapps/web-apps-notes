@@ -2,7 +2,8 @@ import React from 'react';
 
 const Header = (props) => {
   return (
-    <nav className="navbar navbar-expand-sm">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <a className="navbar-brand" href="/"><i className="fas fa-home"></i></a>
       <button
         className="navbar-toggler"
         type="button"
@@ -16,28 +17,25 @@ const Header = (props) => {
 
       <div className="collapse navbar-collapse" id="gd-navbar-content">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <a className="nav-link" href="/"><i className="fas fa-home"></i></a>
-          </li>
-          <li className="nav-item ml-3">
+          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn"
+              className="btn btn-outline-primary"
               type="button"
             ><i className="fas fa-broom gd-nav-btn-icon"></i></button>
           </li>
-          <li className="nav-item ml-2">
+          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn"
+              className="btn btn-outline-primary"
               type="button"
             ><i className="fas fa-copy gd-nav-btn-icon"></i></button>
           </li>
-          <li className="nav-item ml-2">
+          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn"
+              className="btn btn-outline-primary"
               type="button"
             ><i className="fas fa-font gd-nav-btn-icon"></i></button>
           </li>
-          <li className="nav-item dropdown">
+          <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
             <a
               className="nav-link dropdown-toggle"
               href="/"
@@ -55,7 +53,6 @@ const Header = (props) => {
             </div>
           </li>
         </ul>
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </div>
     </nav>
   );

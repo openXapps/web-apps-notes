@@ -103,3 +103,7 @@ $input-color:                       $light;
     width: 20px;
     height: 16px;
 }
+
+.gd-textarea {
+  height: calc(100vh - 100px);
+}

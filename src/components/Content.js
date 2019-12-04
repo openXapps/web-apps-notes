@@ -7,10 +7,10 @@ const Content = () => {
   const onTextChange = (e) => {
     setText(e.target.value);
   };
-
+  //  style={{ height: '85vh' }}
   return (
     <div className="container-fluid">
-      <div className="mt-3 w-100 border" style={{ height: '82vh' }}>
+      <div className="w-100 border gd-textarea">
         <textarea
           style={{ resize: "vertica" }}
           className="w-100 h-100 border-0 p-2"
