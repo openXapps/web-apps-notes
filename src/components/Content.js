@@ -1,24 +1,25 @@
 import React from 'react';
 import Footer from './Footer';
+import { NotesContext } from '../context/NotesProvider';
 
 const Content = () => {
-  const [text, setText] = React.useState('Hello World');
+  const noteContext = React.useContext(NotesContext);
 
-  const onTextChange = (e) => {
-    setText(e.target.value);
+  const onChange = (e) => {
+    noteContext.onNoteChange(e.target.value);
   };
-  //  style={{ height: '85vh' }}
+
   return (
     <div className="container-fluid">
       <div className="w-100 border gd-textarea">
         <textarea
-          style={{ resize: "vertica" }}
+          style={{ fontSize: noteContext.size }}
           className="w-100 h-100 border-0 p-2"
-          defaultValue={text}
-          onChange={onTextChange}
+          defaultValue={noteContext.note}
+          onChange={onChange}
         ></textarea>
       </div>
-      <Footer text={text} />
+      <Footer text={noteContext.note} />
     </div>
   );
 };

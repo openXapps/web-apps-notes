@@ -35,6 +35,18 @@ const Header = (props) => {
               type="button"
             ><i className="fas fa-font gd-nav-btn-icon"></i></button>
           </li>
+          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
+            <button
+              className="btn btn-outline-primary"
+              type="button"
+            ><i className="fas fa-sort-alpha-up gd-nav-btn-icon"></i></button>
+          </li>
+          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
+            <button
+              className="btn btn-outline-primary"
+              type="button"
+            ><i className="fas fa-sort-alpha-down gd-nav-btn-icon"></i></button>
+          </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
             <a
               className="nav-link dropdown-toggle"
