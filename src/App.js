@@ -9,11 +9,11 @@ import PageNotFound from './components/PageNotFound';
 
 function App() {
   // https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1
-  const root = '/apps/web-apps-bookmarker';
+  const root = '/apps/web-apps-notes';
   return (
     <NoteProvider>
       <BrowserRouter basename={root}>
-        <Header home={root} />
+        <Header />
         <Switch>
           <Route path="/" exact component={Content} />
           <Route component={PageNotFound} />
