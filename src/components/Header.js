@@ -1,6 +1,15 @@
 import React from 'react';
+import { NoteContext } from '../context/NoteProvider';
 
-const Header = (props) => {
+const Header = () => {
+  const {
+    isEmpty,
+    onNoteChange,
+    onCopy,
+    onSizeChange,
+    onCaseChange
+  } = React.useContext(NoteContext);
+
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
       <a className="navbar-brand" href="/"><i className="fas fa-home"></i></a>
@@ -21,47 +30,64 @@ const Header = (props) => {
             <button
               className="btn btn-outline-primary"
               type="button"
+              disabled={isEmpty}
+              onClick={() => { onNoteChange('') }}
             ><i className="fas fa-broom gd-nav-btn-icon"></i></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
               className="btn btn-outline-primary"
               type="button"
+              disabled={isEmpty}
+              onClick={onCopy}
             ><i className="fas fa-copy gd-nav-btn-icon"></i></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
               className="btn btn-outline-primary"
               type="button"
-            ><i className="fas fa-font gd-nav-btn-icon"></i></button>
-          </li>
-          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
-            <button
-              className="btn btn-outline-primary"
-              type="button"
+              disabled={isEmpty}
+              onClick={() => { onSizeChange('INCREASE') }}
             ><i className="fas fa-sort-alpha-up gd-nav-btn-icon"></i></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
               className="btn btn-outline-primary"
               type="button"
+              disabled={isEmpty}
+              onClick={() => { onSizeChange('DECREASE') }}
             ><i className="fas fa-sort-alpha-down gd-nav-btn-icon"></i></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
-            <a
-              className="nav-link dropdown-toggle"
-              href="/"
-              id="navbarDropdown"
-              role="button"
+            <button
+              className="btn btn-outline-primary dropdown-toggle"
+              id="gd-dropdown-toolbox"
+              type="button"
+              disabled={isEmpty}
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >Utilities</a>
-            <div className="dropdown-menu shadow" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="/">Trim Spaces</a>
-              <a className="dropdown-item" href="/">UPPER Case</a>
-              {/* <div className="dropdown-divider"></div> */}
-              <a className="dropdown-item" href="/">lower Case</a>
+            ><i className="fas fa-toolbox gd-nav-btn-icon"></i></button>
+            <div className="dropdown-menu shadow" aria-labelledby="gd-dropdown-toolbox">
+              <button
+                className="dropdown-item"
+                type="button"
+                onClick={() => { onCaseChange('UPPER') }}
+              >UPPER Case</button>
+              <button
+                className="dropdown-item"
+                type="button"
+                onClick={() => { onCaseChange('LOWER') }}
+              >lower Case</button>
+              <div className="dropdown-divider"></div>
+              <button
+                className="dropdown-item"
+                type="button"
+              >Sort Ascending</button>
+              <button
+                className="dropdown-item"
+                type="button"
+              >Sort Descending</button>
             </div>
           </li>
         </ul>

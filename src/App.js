@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import NotesProvider from './context/NotesProvider';
+import NoteProvider from './context/NoteProvider';
 
 // Components
 import Header from './components/Header';
@@ -11,7 +11,7 @@ function App() {
   // https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1
   const root = '/apps/web-apps-bookmarker';
   return (
-    <NotesProvider>
+    <NoteProvider>
       <BrowserRouter basename={root}>
         <Header home={root} />
         <Switch>
@@ -19,7 +19,7 @@ function App() {
           <Route component={PageNotFound} />
         </Switch>
       </BrowserRouter>
-    </NotesProvider>
+    </NoteProvider>
   );
 }
 
