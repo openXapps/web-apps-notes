@@ -10,7 +10,7 @@ const Content = () => {
       <div className="w-100 border gd-textarea">
         <textarea
           id='gd-note'
-          style={{ fontSize: size, backgroundColor: '#ccccff' }}
+          style={{ fontSize: size, backgroundColor: 'lightsteelblue' }}
           className="w-100 h-100 border-0 p-2 text-dark"
           placeholder="Start to type something..."
           value={note}

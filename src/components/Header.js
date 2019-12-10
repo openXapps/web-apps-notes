@@ -7,7 +7,8 @@ const Header = () => {
     onNoteChange,
     onCopy,
     onSizeChange,
-    onCaseChange
+    onCaseChange,
+    onTrimSpaces
   } = React.useContext(NoteContext);
 
   return (
@@ -83,11 +84,8 @@ const Header = () => {
               <button
                 className="dropdown-item"
                 type="button"
-              >Sort Ascending</button>
-              <button
-                className="dropdown-item"
-                type="button"
-              >Sort Descending</button>
+                onClick={onTrimSpaces}
+              >Trim Spaces</button>
             </div>
           </li>
         </ul>

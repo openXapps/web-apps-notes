@@ -37,6 +37,15 @@ const NoteProvider = (props) => {
     if (action === 'LOWER') setNote(note.toLowerCase());
   };
 
+  const onTrimSpaces = () => {
+    let result = note;
+    result = result.replace(/\s{2,}/g, ' ');
+    result = result.trim();
+    setNote(result);
+  }
+
+  // rows = value.split(/\n/);
+
   return (
     <NoteContext.Provider
       value={{
@@ -46,7 +55,8 @@ const NoteProvider = (props) => {
         onNoteChange: onNoteChange,
         onCopy: onCopy,
         onSizeChange: onSizeChange,
-        onCaseChange: onCaseChange
+        onCaseChange: onCaseChange,
+        onTrimSpaces: onTrimSpaces
       }}
     >
       {props.children}
