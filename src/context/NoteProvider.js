@@ -39,7 +39,12 @@ const NoteProvider = (props) => {
 
   const onTrimSpaces = () => {
     let result = note;
-    result = result.replace(/\s{2,}/g, ' ');
+    // Find basic space
+    result = result.replace(/\u0020{2,}/gm, ' ');
+    // Find basic return or new line + space
+    result = result.replace(/(\n|\r)\u0020{1,}/gm, '\n');
+    // Find basic space + return or new line
+    result = result.replace(/\u0020{1,}(\n|\r)/gm, '\n');
     result = result.trim();
     setNote(result);
   }
