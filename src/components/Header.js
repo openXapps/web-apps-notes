@@ -33,7 +33,9 @@ const Header = () => {
               type="button"
               disabled={isEmpty}
               onClick={() => { onNoteChange('') }}
-            ><i className="fas fa-broom gd-nav-btn-icon"></i></button>
+            ><i className="fas fa-broom gd-nav-btn-icon"></i><span
+              className="pl-1 d-md-inline d-sm-none"
+            >Clear</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
@@ -41,7 +43,9 @@ const Header = () => {
               type="button"
               disabled={isEmpty}
               onClick={onCopy}
-            ><i className="fas fa-copy gd-nav-btn-icon"></i></button>
+            ><i className="fas fa-copy gd-nav-btn-icon"></i><span
+              className="pl-1 d-md-inline d-sm-none"
+            >Copy</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
@@ -49,7 +53,9 @@ const Header = () => {
               type="button"
               disabled={isEmpty}
               onClick={() => { onSizeChange('INCREASE') }}
-            ><i className="fas fa-sort-alpha-up gd-nav-btn-icon"></i></button>
+            ><i className="fas fa-sort-alpha-up gd-nav-btn-icon"></i><span
+              className="pl-1 d-md-inline d-sm-none"
+            >Increase Font Size</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
@@ -57,7 +63,9 @@ const Header = () => {
               type="button"
               disabled={isEmpty}
               onClick={() => { onSizeChange('DECREASE') }}
-            ><i className="fas fa-sort-alpha-down gd-nav-btn-icon"></i></button>
+            ><i className="fas fa-sort-alpha-down gd-nav-btn-icon"></i><span
+              className="pl-1 d-md-inline d-sm-none"
+            >Decrease Font Size</span></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
