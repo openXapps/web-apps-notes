@@ -29,7 +29,7 @@ const Header = () => {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn btn-outline-primary"
+              className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty}
               onClick={() => { onNoteChange('') }}
@@ -39,7 +39,7 @@ const Header = () => {
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn btn-outline-primary"
+              className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty}
               onClick={onCopy}
@@ -49,35 +49,37 @@ const Header = () => {
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn btn-outline-primary"
+              className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty}
               onClick={() => { onSizeChange('INCREASE') }}
             ><i className="fas fa-sort-alpha-up gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
-            >Increase Font Size</span></button>
+            >Increase Font</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn btn-outline-primary"
+              className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty}
               onClick={() => { onSizeChange('DECREASE') }}
             ><i className="fas fa-sort-alpha-down gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
-            >Decrease Font Size</span></button>
+            >Decrease Font</span></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
-              className="btn btn-outline-primary dropdown-toggle"
+              className="btn btn-outline-primary dropdown-toggle w-100"
               id="gd-dropdown-toolbox"
               type="button"
               disabled={isEmpty}
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            ><i className="fas fa-toolbox gd-nav-btn-icon"></i></button>
-            <div className="dropdown-menu shadow" aria-labelledby="gd-dropdown-toolbox">
+            ><i className="fas fa-toolbox gd-nav-btn-icon"></i><span
+              className="pl-1 d-md-inline d-sm-none"
+            >Tool Box</span></button>
+            <div className="dropdown-menu shadow mt-2" aria-labelledby="gd-dropdown-toolbox">
               <button
                 className="dropdown-item"
                 type="button"

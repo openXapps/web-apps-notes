@@ -2,9 +2,11 @@ import React from 'react';
 
 export const NoteContext = React.createContext();
 
+const defaultFontSize = 24;
+
 const NoteProvider = (props) => {
   const [note, setNote] = React.useState('');
-  const [size, setSize] = React.useState(24);
+  const [size, setSize] = React.useState(defaultFontSize);
   const [isEmpty, setIsEmpty] = React.useState(true);
 
   const onNoteChange = (v) => {
@@ -15,6 +17,7 @@ const NoteProvider = (props) => {
       setIsEmpty(true);
     }
     setNote(v);
+    setSize(defaultFontSize);
   };
 
   const onCopy = () => {
