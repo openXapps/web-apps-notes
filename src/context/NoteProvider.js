@@ -15,9 +15,9 @@ const NoteProvider = (props) => {
     }
     if (!v && !isEmpty) {
       setIsEmpty(true);
+      setSize(defaultFontSize);
     }
     setNote(v);
-    setSize(defaultFontSize);
   };
 
   const onCopy = () => {
