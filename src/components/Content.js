@@ -17,7 +17,7 @@ const Content = () => {
           onChange={(e) => { onNoteChange(e.target.value) }}
         ></textarea>
       </div>
-      <Footer text={note} size={size} />
+      <Footer noteLength={note.length} fontSize={size} />
     </div>
   );
 };
