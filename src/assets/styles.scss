@@ -1,37 +1,37 @@
 // Custom BS4 variables
 
-$_primary:     #6699cc;
-$_secondary:   #3a5c7f;
-$_success:     #2eb82e;
-$_info:        #e6e600;
-$_warning:     #e66800;
-$_danger:      #e60000;
-$_light:       #a1b4c7;
-$_dark:        #1f4163;
-$_white:       #ffffff;
-$_black:       #000000;
+$_primary: #6699cc;
+$_secondary: #3a5c7f;
+$_success: #2eb82e;
+$_info: #e6e600;
+$_warning: #e66800;
+$_danger: #e60000;
+$_light: #a1b4c7;
+$_dark: #1f4163;
+$_white: #ffffff;
+$_black: #000000;
 
-$primary:       $_primary;
-$secondary:     $_secondary;
-$success:       $_success;
-$info:          $_info;
-$warning:       $_warning;
-$danger:        $_danger;
-$light:         $_light;
-$dark:          $_dark;
-$white:         $_white;
-$black:         $_black;
+$primary: $_primary;
+$secondary: $_secondary;
+$success: $_success;
+$info: $_info;
+$warning: $_warning;
+$danger: $_danger;
+$light: $_light;
+$dark: $_dark;
+$white: $_white;
+$black: $_black;
 
 // $theme-colors: (
 
 // );
 
-$body-bg:             $dark;
-$body-color:          $light;
+$body-bg: $dark;
+$body-color: $light;
 
 // Dropdowns
-$dropdown-padding-y:                0px;
-$dropdown-bg:                       $light;
+$dropdown-padding-y: 0px;
+$dropdown-bg: $light;
 // $dropdown-min-width:                10rem !default;
 // $dropdown-padding-y:                .5rem !default;
 // $dropdown-spacer:                   .125rem !default;
@@ -88,21 +88,27 @@ $dropdown-bg:                       $light;
 // $input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
 
 // NavBar
-$navbar-dark-toggler-border-color:  $dark;
+$navbar-dark-toggler-border-color: $dark;
 // $navbar-dark-toggler-border-color:  rgba($white, .1) !default;
 // $navbar-toggler-padding-y:          .25rem !default;
 // $navbar-toggler-padding-x:          .75rem !default;
 // $navbar-toggler-font-size:          $font-size-lg !default;
 // $navbar-toggler-border-radius:      $btn-border-radius !default;
 
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 // Custom App CSS
 .gd-nav-btn-icon {
-    width: 20px;
-    height: 16px;
+  width: 20px;
+  height: 16px;
 }
 
 .gd-textarea {
   height: calc(100vh - 100px);
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none !important;
+  box-shadow: none;
 }
