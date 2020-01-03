@@ -3,30 +3,65 @@ import React from 'react';
 export const NoteContext = React.createContext();
 
 const defaultFontSize = 24;
+const defaultNoteTitle = 'Untitled note - Save to set a title';
+
+/**
+ * ** Note Model **
+ * noteId
+ * noteDate
+ * noteTitle
+ * note 
+ */
 
 const NoteProvider = (props) => {
+  const [noteId, setNoteId] = React.useState('');
+  const [noteTitle, setNoteTitle] = React.useState(defaultNoteTitle);
   const [note, setNote] = React.useState('');
   const [size, setSize] = React.useState(defaultFontSize);
   const [isEmpty, setIsEmpty] = React.useState(true);
+  const [isSaved, setIsSaved] = React.useState(true);
+  const [navbarLocked, setNavbarLocked] = React.useState(false);
+
+
+  React.useEffect(() => {
+    if (note) {
+      setIsSaved(false);
+    } else {
+      setIsSaved(true);
+    }
+    return () => { };
+  }, [note]);
+
+  const onNoteIdChange = (v) => {
+    setNoteId(v);
+  };
+
+  const onNoteTitleChange = (v) => {
+    setNoteTitle(v);
+  };
 
   const onNoteChange = (v) => {
+    // v not empty and isEmpty true
     if (v && isEmpty) {
       setIsEmpty(false);
     }
+    // v empty and isEmpty not true
     if (!v && !isEmpty) {
       setIsEmpty(true);
       setSize(defaultFontSize);
+      setNoteId('');
+      setNoteTitle(defaultNoteTitle);
     }
     setNote(v);
   };
 
-  const onCopy = () => {
-    /* Get the text field */
-    const el = document.getElementById('gd-note');
-    /* Select the text field */
+  const onCopy = (elementId) => {
+    /* Get DOM text field */
+    const el = document.getElementById(elementId);
+    /* Select text in field */
     el.select();
     el.setSelectionRange(0, 99999); /*For mobile devices*/
-    /* Copy the text inside the text field */
+    /* Copy text in field */
     document.execCommand("copy");
   }
 
@@ -52,19 +87,30 @@ const NoteProvider = (props) => {
     setNote(result);
   }
 
+  const toggleNavbarLock = () => {
+    setNavbarLocked(!navbarLocked);
+  };
+
   // rows = value.split(/\n/);
 
   return (
     <NoteContext.Provider
       value={{
+        noteId: noteId,
+        noteTitle: noteTitle,
         note: note,
         size: size,
         isEmpty: isEmpty,
-        onNoteChange: onNoteChange,
+        isSaved: isSaved,
+        navbarLocked: navbarLocked,
         onCopy: onCopy,
+        onNoteIdChange: onNoteIdChange,
+        onNoteTitleChange: onNoteTitleChange,
+        onNoteChange: onNoteChange,
         onSizeChange: onSizeChange,
         onCaseChange: onCaseChange,
-        onTrimSpaces: onTrimSpaces
+        onTrimSpaces: onTrimSpaces,
+        toggleNavbarLock: toggleNavbarLock
       }}
     >
       {props.children}

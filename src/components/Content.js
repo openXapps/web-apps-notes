@@ -3,10 +3,11 @@ import Footer from './Footer';
 import { NoteContext } from '../context/NoteProvider';
 
 const Content = () => {
-  const { note, size, onNoteChange } = React.useContext(NoteContext);
+  const { noteTitle, note, size, onNoteChange } = React.useContext(NoteContext);
 
   return (
     <div className="container-fluid">
+      <div className="h5">{noteTitle}</div>
       <div className="w-100 border gd-textarea">
         <textarea
           id='gd-note'
