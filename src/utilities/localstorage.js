@@ -26,8 +26,9 @@ const isLocalStorage = () => {
  * Get data from local storage
  * @param {string} identifier Local storage identifier
  * @param {string} sortBy Field to sort by. null means unsorted
+ * @param {boolean} ascending Sort order (true => ascending else descending)
  */
-const getLocalStorage = (identifier, sortBy) => {
+const getLocalStorage = (identifier, sortBy, ascending) => {
   let response = {
     statusOK: false,
     data: []
@@ -36,7 +37,8 @@ const getLocalStorage = (identifier, sortBy) => {
     let storedData = JSON.parse(localStorage.getItem(identifier));
     // console.log(storedData);
     if (storedData) {
-      if (sortBy) storedData.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : -1);
+      if (sortBy && ascending) storedData.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : -1);
+      if (sortBy && !ascending) storedData.sort((a, b) => (a[sortBy] < b[sortBy]) ? 1 : -1);
       response = {
         statusOK: true,
         data: storedData

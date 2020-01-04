@@ -3,7 +3,7 @@ import Footer from './Footer';
 import { NoteContext } from '../context/NoteProvider';
 
 const Content = () => {
-  const { noteTitle, note, size, onNoteChange } = React.useContext(NoteContext);
+  const { noteTitle, noteContent, fontSize, onNoteContentChange } = React.useContext(NoteContext);
 
   return (
     <div className="container-fluid">
@@ -11,14 +11,14 @@ const Content = () => {
       <div className="w-100 border gd-textarea">
         <textarea
           id='gd-note'
-          style={{ fontSize: size, backgroundColor: 'lightsteelblue' }}
+          style={{ fontSize: fontSize, backgroundColor: 'lightsteelblue' }}
           className="w-100 h-100 border-0 p-2 text-dark"
           placeholder="Start to type something..."
-          value={note}
-          onChange={(e) => { onNoteChange(e.target.value) }}
+          value={noteContent}
+          onChange={(e) => { onNoteContentChange(e.target.value) }}
         ></textarea>
       </div>
-      <Footer noteLength={note.length} fontSize={size} />
+      <Footer noteLength={noteContent.length} fontSize={fontSize} />
     </div>
   );
 };

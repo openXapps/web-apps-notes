@@ -17,12 +17,11 @@ const Save = () => {
   const textInput = React.useRef();
   const {
     noteTitle,
-    note,
+    noteContent,
     onNoteIdChange,
     onNoteTitleChange,
     toggleNavbarLock
   } = React.useContext(NoteContext);
-
 
   // Run once
   React.useEffect(() => {
@@ -48,15 +47,16 @@ const Save = () => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    let savedNotes = getLocalStorage('gd-notes', null);
+    let savedNotes = getLocalStorage('gd-notes', null, null);
     let tempNotes = [];
     switch (mode) {
       case 'NEW':
         savedNotes.data.push({
           noteId: noteId,
           noteTitle: noteTitle,
-          note: window.btoa(note),
-          noteDate: new Date()
+          noteContent: window.btoa(unescape(encodeURIComponent(noteContent))),
+          noteDate: new Date(),
+          favourite: false
         });
         // console.log('Save: notes.NEW...', savedNotes);
         onNoteIdChange(noteId);
@@ -69,8 +69,9 @@ const Save = () => {
             tempNotes.push({
               ...v,
               noteTitle: noteTitle,
-              note: window.btoa(note),
-              noteDate: new Date()
+              noteContent: window.btoa(unescape(encodeURIComponent(noteContent))),
+              noteDate: new Date(),
+              favourite: false
             })
           } else { tempNotes.push({ ...v }) }
         })

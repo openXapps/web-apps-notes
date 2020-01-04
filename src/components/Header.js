@@ -3,25 +3,18 @@ import { Link } from 'react-router-dom';
 import { NoteContext } from '../context/NoteProvider';
 
 const Header = () => {
-  // const noteId = '347cf222-887b-11e9-bc42-526af7764f64';
-  // const noteId = '';
   const {
     noteId,
     isEmpty,
     isSaved,
     navbarLocked,
-    onNoteChange,
+    onNoteContentChange,
     onCopy,
     onSizeChange,
     onCaseChange,
     onTrimSpaces,
     toggleNavbarLock
   } = React.useContext(NoteContext);
-
-  // React.useEffect(() => {
-
-  //   return () => {};
-  // }, [navbarLocked])
 
   // Tries to toggle the navbar
   const collapseNavBar = () => {
@@ -32,8 +25,6 @@ const Header = () => {
     }
     toggleNavbarLock();
   };
-
-  // console.log('Header: props...', props);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -64,7 +55,6 @@ const Header = () => {
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <Link
               className={isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-primary w-100'}
-              // to={noteId ? `/save/?noteId=${noteId}` : '/save'}
               to={noteId ? `/save/${noteId}` : '/save'}
               role="button"
               onClick={collapseNavBar}
@@ -77,7 +67,7 @@ const Header = () => {
               className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty || navbarLocked}
-              onClick={() => { onNoteChange('') }}
+              onClick={() => { onNoteContentChange('') }}
             ><i className="fas fa-broom gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
             >Clear</span></button>
