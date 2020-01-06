@@ -18,7 +18,7 @@ const Open = () => {
     setTimeout(() => {
       setNotes(getLocalStorage('gd-notes', 'noteDate', false).data);
       setIsLoading(false);
-    }, 600);
+    }, 500);
     return () => { };
   }, [])
 
