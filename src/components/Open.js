@@ -5,9 +5,11 @@ import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
 
 const Open = () => {
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isDeleteEmpty, setIsDeleteEmpty] = React.useState(true);
   const [notes, setNotes] = React.useState([])
   const routeHistory = useHistory();
   const {
+    noteId,
     onNoteIdChange,
     onNoteTitleChange,
     onNoteContentChange,
@@ -44,11 +46,20 @@ const Open = () => {
       return true;
     });
     // console.log('Open: delete button...', tempNotes);
+    if (tempNotes.length < notes.length) setIsDeleteEmpty(false);
     setNotes(tempNotes);
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
+  const handleConfirmDelete = () => {
+    if (!isDeleteEmpty && notes.length > 0) {
+      saveLocalStorage('gd-notes', notes);
+      toggleNavbarLock();
+      routeHistory.goBack();
+    }
+  };
+
+  const handleCancel = () => {
+    // e.preventDefault();
     toggleNavbarLock();
     routeHistory.goBack();
   };
@@ -80,6 +91,7 @@ const Open = () => {
                             className="btn"
                             type="button"
                             data-id={index}
+                            disabled={noteId === obj.noteId}
                             onClick={handleNoteDelete}
                           >X</button>
                         </div>
@@ -93,7 +105,13 @@ const Open = () => {
         ) : (<div className="my-3">Loading...</div>)
         }
         <button
-          className="btn btn-outline-warning"
+          className="btn btn-outline-danger"
+          type="button"
+          disabled={isDeleteEmpty}
+          onClick={handleConfirmDelete}
+        >Confirm Delete</button>
+        <button
+          className="btn btn-outline-warning ml-2"
           type="button"
           onClick={handleCancel}
         >Cancel</button>
