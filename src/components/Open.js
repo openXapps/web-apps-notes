@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { NoteContext } from '../context/NoteProvider';
 import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
+import { atou } from '../utilities/base64';
 
 const Open = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -28,7 +29,8 @@ const Open = () => {
     // const targetId = notes[e.target.dataset.id].noteId;
     onNoteIdChange(notes[e.target.dataset.id].noteId);
     onNoteTitleChange(notes[e.target.dataset.id].noteTitle);
-    onNoteContentChange(window.atob(notes[e.target.dataset.id].noteContent));
+    // onNoteContentChange(window.atob(notes[e.target.dataset.id].noteContent));
+    onNoteContentChange(atou(notes[e.target.dataset.id].noteContent));
     // console.log('Open: open button...', targetId);
     // console.log('Open: open button...', window.atob(notes[e.target.dataset.id].noteContent));
     saveLocalStorage('gd-notes', notes);
@@ -59,7 +61,6 @@ const Open = () => {
   };
 
   const handleCancel = () => {
-    // e.preventDefault();
     toggleNavbarLock();
     routeHistory.goBack();
   };
@@ -81,6 +82,7 @@ const Open = () => {
                         <button
                           className="btn btn-outline-primary btn-block text-left px-2"
                           type="button"
+                          disabled={noteId === obj.noteId}
                           data-id={index}
                           onClick={handleNoteOpen}
                         >{obj.noteTitle}</button>
@@ -88,7 +90,7 @@ const Open = () => {
                       <div className="flex-grow-0 flex-shrink-0">
                         <div className="d-block ml-2">
                           <button
-                            className="btn"
+                            className="btn btn-outline-secondary"
                             type="button"
                             data-id={index}
                             disabled={noteId === obj.noteId}
@@ -105,13 +107,13 @@ const Open = () => {
         ) : (<div className="my-3">Loading...</div>)
         }
         <button
-          className="btn btn-outline-danger"
+          className="btn btn-outline-light"
           type="button"
           disabled={isDeleteEmpty}
           onClick={handleConfirmDelete}
         >Confirm Delete</button>
         <button
-          className="btn btn-outline-warning ml-2"
+          className="btn btn-outline-light ml-2"
           type="button"
           onClick={handleCancel}
         >Cancel</button>

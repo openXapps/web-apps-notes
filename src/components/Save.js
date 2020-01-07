@@ -3,6 +3,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import uuidv1 from 'uuid/v1';
 import { NoteContext } from '../context/NoteProvider';
 import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
+import { utoa } from '../utilities/base64';
 
 // Set focus to imput element
 // https://medium.com/trabe/react-useref-hook-b6c9d39e2022
@@ -54,7 +55,8 @@ const Save = () => {
         savedNotes.data.push({
           noteId: noteId,
           noteTitle: noteTitle,
-          noteContent: window.btoa(unescape(encodeURIComponent(noteContent))),
+          // noteContent: window.btoa(unescape(encodeURIComponent(noteContent))),
+          noteContent: utoa(noteContent),
           noteDate: new Date(),
           favourite: false
         });
@@ -113,11 +115,11 @@ const Save = () => {
               required={true}
             />
             <button
-              className="btn btn-outline-success mr-2"
+              className="btn btn-outline-light"
               type="submit"
             >Save</button>
             <button
-              className="btn btn-outline-warning"
+              className="btn btn-outline-light ml-2"
               type="button"
               onClick={handleCancel}
             >Cancel</button>
