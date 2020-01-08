@@ -40,9 +40,13 @@ const Save = () => {
       setComponentTitle('Edit note');
       setNoteId(routeMatch.params.noteId);
     }
+    // Set focus to input element
     textInput.current.focus();
-
-    return () => true;
+    // Cleanup effect
+    return () => {
+      // Restore navbar state
+      toggleNavbarLock();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -84,15 +88,11 @@ const Save = () => {
         // Nothing to do
         break;
     };
-
-    toggleNavbarLock();
     routeHistory.goBack();
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
+  const handleCancel = () => {
     if (noteTitle !== previousTitle) onNoteTitleChange(previousTitle);
-    toggleNavbarLock();
     routeHistory.goBack();
   };
 

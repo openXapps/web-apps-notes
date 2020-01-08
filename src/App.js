@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NoteProvider from './context/NoteProvider';
 
 // Components
@@ -15,7 +15,7 @@ function App() {
   // https://reacttraining.com/blog/react-router-v5-1/
   return (
     <NoteProvider>
-      <BrowserRouter basename={root}>
+      <Router basename={root}>
         <Header />
         <Switch>
           <Route path="/open"><Open /></Route>
@@ -24,7 +24,7 @@ function App() {
           <Route path="/"><Content /></Route>
           <Route><PageNotFound /></Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </NoteProvider>
   );
 }

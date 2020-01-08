@@ -88,8 +88,9 @@ const NoteProvider = (props) => {
     setNoteContent(result);
   }
 
-  const toggleNavbarLock = () => {
-    setNavbarLocked(!navbarLocked);
+  const toggleNavbarLock = (state) => {
+    // console.log(`NoteProvider: toggleNavbarLock... ${state ? state : !navbarLocked}`);
+    state ? setNavbarLocked(state) : setNavbarLocked(!navbarLocked);
   };
 
   // rows = value.split(/\n/);
