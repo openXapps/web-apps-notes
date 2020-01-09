@@ -17,13 +17,16 @@ const Header = () => {
   } = React.useContext(NoteContext);
 
   // Tries to toggle the navbar
-  const collapseNavBar = () => {
+  const collapseNavBar = (e) => {
+    const currentElement = e.target.name ? e.target.name : '';
+    // console.log ('Header: collapseNavBar.currentElement...', currentElement);
     let elToggler = document.getElementsByClassName('navbar-toggler');
     let elBar = document.getElementById('gd-navbar-content');
     if (elBar.classList.contains('show')) {
       elToggler[0].click();
     }
     toggleNavbarLock();
+    if (currentElement === 'gd-navbar-upload') onNoteContentChange('');
   };
 
   return (
@@ -144,6 +147,7 @@ const Header = () => {
                 className={navbarLocked ? 'dropdown-item disabled' : 'dropdown-item'}
                 to="/upload"
                 role="button"
+                name="gd-navbar-upload"
                 onClick={collapseNavBar}
               >Upload Notes</Link>
             </div>
