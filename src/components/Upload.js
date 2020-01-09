@@ -17,9 +17,9 @@ const notesValidator = (notes) => {
             if (response.notes.length > 0) {
                 // Check if valid notesContent object
                 response.isValid = response.notes[0].noteId ? true : false;
-                response.isValid = response.notes[0].noteTitle ? true : false;
-                response.isValid = response.notes[0].noteContent ? true : false;
-                response.isValid = response.notes[0].noteDate ? true : false;
+                response.isValid = response.notes[0].noteTitle && response.isValid ? true : false;
+                response.isValid = response.notes[0].noteContent && response.isValid ? true : false;
+                response.isValid = response.notes[0].noteDate && response.isValid ? true : false;
                 // response.isValid = response.notes[0].favourite ? true : false;
             }
         } else {
@@ -104,23 +104,31 @@ const Upload = () => {
                     value={notesContent}
                     onChange={handleNotesChange}
                 ></textarea>
-                <button
-                    className={overwriteButton.label === 'ERROR' ? ('btn btn-outline-info') : ('btn btn-outline-light')}
-                    type="button"
-                    disabled={overwriteButton.isDisabled}
-                    onClick={handleOverwrite}
-                >{overwriteButton.label}</button>
-                <button
-                    className={appendButton.label === 'ERROR' ? ('btn btn-outline-info ml-2') : ('btn btn-outline-light ml-2')}
-                    type="button"
-                    disabled={appendButton.isDisabled}
-                    onClick={handleAppend}
-                >{appendButton.label}</button>
-                <button
-                    className="btn btn-outline-light ml-2"
-                    type="button"
-                    onClick={() => { routerHistory.goBack(); }}
-                >Back</button>
+                <div className="d-flex">
+                    <div className="">
+                        <button
+                            className={overwriteButton.label === 'ERROR' ? ('btn btn-outline-info') : ('btn btn-outline-light')}
+                            type="button"
+                            disabled={overwriteButton.isDisabled}
+                            onClick={handleOverwrite}
+                        >{overwriteButton.label}</button>
+                    </div>
+                    <div className="ml-2">
+                        <button
+                            className={appendButton.label === 'ERROR' ? ('btn btn-outline-info') : ('btn btn-outline-light')}
+                            type="button"
+                            disabled={appendButton.isDisabled}
+                            onClick={handleAppend}
+                        >{appendButton.label}</button>
+                    </div>
+                    <div className="ml-2">
+                        <button
+                            className="btn btn-outline-light"
+                            type="button"
+                            onClick={() => { routerHistory.goBack(); }}
+                        >Back</button>
+                    </div>
+                </div>
             </div>
         </div>
     );
