@@ -91,9 +91,9 @@ const Header = () => {
               type="button"
               disabled={isEmpty || navbarLocked}
               onClick={() => { onSizeChange('INCREASE') }}
-            ><i className="fas fa-sort-alpha-up gd-nav-btn-icon"></i><span
+            ><i className="fas fa-search-plus gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
-            >Increase Font</span></button>
+            >Zoom In</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
@@ -101,9 +101,9 @@ const Header = () => {
               type="button"
               disabled={isEmpty || navbarLocked}
               onClick={() => { onSizeChange('DECREASE') }}
-            ><i className="fas fa-sort-alpha-down gd-nav-btn-icon"></i><span
+            ><i className="fas fa-search-minus gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
-            >Decrease Font</span></button>
+            >Zoom Out</span></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
