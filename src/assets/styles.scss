@@ -107,6 +107,11 @@ $navbar-dark-toggler-border-color: $dark;
   height: calc(100vh - 139px);
 }
 
+.gd-textarea-download,
+.gd-textarea-upload {
+  height: calc(100vh - 260px);
+}
+
 .navbar-toggler:focus,
 .navbar-toggler:active {
   outline: none !important;

@@ -7,6 +7,8 @@ import Header from './components/Header';
 import Content from './components/Content';
 import Open from './components/Open';
 import Save from './components/Save';
+import Download from './components/Download';
+import Upload from './components/Upload';
 import PageNotFound from './components/PageNotFound';
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
           <Route path="/open"><Open /></Route>
           <Route path="/save/:noteId"><Save /></Route>
           <Route path="/save"><Save /></Route>
+          <Route path="/download"><Download /></Route>
+          <Route path="/upload"><Upload /></Route>
           <Route path="/"><Content /></Route>
           <Route><PageNotFound /></Route>
         </Switch>

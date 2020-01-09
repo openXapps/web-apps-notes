@@ -107,7 +107,6 @@ const Header = () => {
               className="btn btn-outline-primary dropdown-toggle w-100"
               id="gd-dropdown-toolbox"
               type="button"
-              disabled={isEmpty || navbarLocked}
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
@@ -118,19 +117,35 @@ const Header = () => {
               <button
                 className="dropdown-item"
                 type="button"
+                disabled={isEmpty || navbarLocked}
                 onClick={() => { onCaseChange('UPPER') }}
               >UPPER Case</button>
               <button
                 className="dropdown-item"
                 type="button"
+                disabled={isEmpty || navbarLocked}
                 onClick={() => { onCaseChange('LOWER') }}
               >lower Case</button>
               <div className="dropdown-divider"></div>
               <button
                 className="dropdown-item"
                 type="button"
+                disabled={isEmpty || navbarLocked}
                 onClick={onTrimSpaces}
               >Trim Spaces</button>
+              <div className="dropdown-divider"></div>
+              <Link
+                className={navbarLocked ? 'dropdown-item disabled' : 'dropdown-item'}
+                to="/download"
+                role="button"
+                onClick={collapseNavBar}
+              >Download Notes</Link>
+              <Link
+                className={navbarLocked ? 'dropdown-item disabled' : 'dropdown-item'}
+                to="/upload"
+                role="button"
+                onClick={collapseNavBar}
+              >Upload Notes</Link>
             </div>
           </li>
         </ul>
