@@ -16,7 +16,7 @@ const Footer = (props) => {
             className="btn btn-outline-primary btn-sm"
             type="button"
             onClick={props.onToggleLineWrap}
-          >line wrap is {props.lineWrapOn ? 'on' : 'off'}</button>
+          >line wrap is <span className="text-info">{props.lineWrapOn ? 'on' : 'off'}</span></button>
           <button
             className="btn btn-outline-primary btn-sm ml-2"
             type="button"
