@@ -1,8 +1,17 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 import { NoteContext } from '../context/NoteProvider';
 import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
 import { atou } from '../utilities/base64';
+
+const NoteLabel = ({ noteTitle, noteDate }) => {
+  return (
+    <>
+      <span>{noteTitle}</span> <span className="d-none d-md-inline float-right">{noteDate}</span>
+    </>
+  );
+};
 
 const Open = () => {
   const [isDeleteEmpty, setIsDeleteEmpty] = React.useState(true);
@@ -30,7 +39,7 @@ const Open = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleNoteOpen = (e) => {
+  const onNoteOpen = (e) => {
     // const targetId = notes[e.target.dataset.id].noteId;
     onNoteIdChange(notes[e.target.dataset.id].noteId);
     onNoteTitleChange(notes[e.target.dataset.id].noteTitle);
@@ -42,7 +51,7 @@ const Open = () => {
     routeHistory.goBack();
   };
 
-  const handleNoteDelete = (e) => {
+  const onNoteDelete = (e) => {
     let tempNotes = [];
     const targetId = notes[e.target.dataset.id].noteId;
     notes.map((obj, index) => {
@@ -56,14 +65,14 @@ const Open = () => {
     setNotes(tempNotes);
   };
 
-  const handleConfirmDelete = () => {
+  const onConfirmDelete = () => {
     if (!isDeleteEmpty && notes.length > 0) {
       saveLocalStorage('gd-notes', notes);
       routeHistory.goBack();
     }
   };
 
-  const handleCancel = () => {
+  const onCancel = () => {
     routeHistory.goBack();
   };
 
@@ -85,8 +94,8 @@ const Open = () => {
                         type="button"
                         disabled={noteId === obj.noteId}
                         data-id={index}
-                        onClick={handleNoteOpen}
-                      >{obj.noteTitle}</button>
+                        onClick={onNoteOpen}
+                      ><NoteLabel noteTitle={obj.noteTitle} noteDate={moment(obj.noteDate).format('ddd, MMM Do YYYY, HH:mm')} /></button>
                     </div>
                     <div className="flex-grow-0 flex-shrink-0">
                       <div className="d-block ml-2">
@@ -95,7 +104,7 @@ const Open = () => {
                           type="button"
                           data-id={index}
                           disabled={noteId === obj.noteId}
-                          onClick={handleNoteDelete}
+                          onClick={onNoteDelete}
                         >X</button>
                       </div>
                     </div>
@@ -109,13 +118,13 @@ const Open = () => {
           className="btn btn-outline-light"
           type="button"
           disabled={isDeleteEmpty}
-          onClick={handleConfirmDelete}
+          onClick={onConfirmDelete}
         >Confirm Delete</button>
         <button
           className="btn btn-outline-light ml-2"
           type="button"
           ref={focusElement}
-          onClick={handleCancel}
+          onClick={onCancel}
         >Cancel</button>
       </div>
     </div >

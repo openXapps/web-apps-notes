@@ -10,7 +10,6 @@ const Header = () => {
     navbarLocked,
     onNoteContentChange,
     onCopy,
-    onSizeChange,
     onCaseChange,
     onTrimSpaces,
     toggleNavbarLock
@@ -26,14 +25,15 @@ const Header = () => {
       elToggler[0].click();
     }
     toggleNavbarLock();
-    if (currentElement === 'gd-navbar-upload') onNoteContentChange('');
+    // Upload button will clear current note
+    if (currentElement === 'gd-navbar-upload' && noteId) onNoteContentChange('');
   };
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
       <a className="navbar-brand" href="/"><i className="fas fa-home"></i></a>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler px-1"
         type="button"
         data-toggle="collapse"
         data-target="#gd-navbar-content"
@@ -84,26 +84,6 @@ const Header = () => {
             ><i className="fas fa-copy gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
             >Copy</span></button>
-          </li>
-          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
-            <button
-              className="btn btn-outline-primary w-100"
-              type="button"
-              disabled={isEmpty || navbarLocked}
-              onClick={() => { onSizeChange('INCREASE') }}
-            ><i className="fas fa-search-plus gd-nav-btn-icon"></i><span
-              className="pl-1 d-md-inline d-sm-none"
-            >Zoom In</span></button>
-          </li>
-          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
-            <button
-              className="btn btn-outline-primary w-100"
-              type="button"
-              disabled={isEmpty || navbarLocked}
-              onClick={() => { onSizeChange('DECREASE') }}
-            ><i className="fas fa-search-minus gd-nav-btn-icon"></i><span
-              className="pl-1 d-md-inline d-sm-none"
-            >Zoom Out</span></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button

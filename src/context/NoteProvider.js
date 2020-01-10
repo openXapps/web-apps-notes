@@ -2,7 +2,7 @@ import React from 'react';
 
 export const NoteContext = React.createContext();
 
-const defaultFontSize = 24;
+// const defaultFontSize = 24;
 const defaultNoteTitle = 'Untitled note - Save to set a title';
 
 /**
@@ -18,7 +18,7 @@ const NoteProvider = (props) => {
   const [noteId, setNoteId] = React.useState('');
   const [noteTitle, setNoteTitle] = React.useState(defaultNoteTitle);
   const [noteContent, setNoteContent] = React.useState('');
-  const [fontSize, setFontSize] = React.useState(defaultFontSize);
+  // const [fontSize, setFontSize] = React.useState(defaultFontSize);
   const [isEmpty, setIsEmpty] = React.useState(true);
   const [isSaved, setIsSaved] = React.useState(true);
   const [navbarLocked, setNavbarLocked] = React.useState(false);
@@ -49,7 +49,7 @@ const NoteProvider = (props) => {
     // v empty and isEmpty not true
     if (!v && !isEmpty) {
       setIsEmpty(true);
-      setFontSize(defaultFontSize);
+      // setFontSize(defaultFontSize);
       setNoteId('');
       setNoteTitle(defaultNoteTitle);
     }
@@ -66,10 +66,10 @@ const NoteProvider = (props) => {
     document.execCommand("copy");
   }
 
-  const onSizeChange = (action) => {
-    if (action === 'INCREASE' && fontSize < 60) setFontSize(fontSize + 4);
-    if (action === 'DECREASE' && fontSize > 12) setFontSize(fontSize - 4);
-  };
+  // const onSizeChange = (action) => {
+  //   if (action === 'INCREASE' && fontSize < 60) setFontSize(fontSize + 4);
+  //   if (action === 'DECREASE' && fontSize > 12) setFontSize(fontSize - 4);
+  // };
 
   const onCaseChange = (action) => {
     if (action === 'UPPER') setNoteContent(noteContent.toUpperCase());
@@ -93,8 +93,6 @@ const NoteProvider = (props) => {
     state ? setNavbarLocked(state) : setNavbarLocked(!navbarLocked);
   };
 
-  // rows = value.split(/\n/);
-
   return (
     <NoteContext.Provider
       value={{
@@ -107,8 +105,8 @@ const NoteProvider = (props) => {
         onCaseChange: onCaseChange,
         onTrimSpaces: onTrimSpaces,
         onCopy: onCopy,
-        fontSize: fontSize,
-        onSizeChange: onSizeChange,
+        // fontSize: fontSize,
+        // onSizeChange: onSizeChange,
         isEmpty: isEmpty,
         isSaved: isSaved,
         navbarLocked: navbarLocked,

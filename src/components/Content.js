@@ -1,14 +1,38 @@
 import React from 'react';
 import Footer from './Footer';
 import { NoteContext } from '../context/NoteProvider';
+import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
+
+/**
+ * Helper function to get config from local storage
+ * @returns An object containing current config
+ */
+const noteConfig = () => {
+  const config = getLocalStorage('gd-notes-config');
+  return config.statusOK ? config.data : {
+    fontSize: (config.data.fontSize ? config.data.fontSize : 24),
+    lineWrapOn: true };
+};
 
 const Content = () => {
-  const { noteTitle, noteContent, fontSize, onNoteContentChange } = React.useContext(NoteContext);
-  const [lineWrapOn, setLineWrapOn] = React.useState(true);
+  const { noteTitle, noteContent, onNoteContentChange } = React.useContext(NoteContext);
+  const [fontSize, setFontSize] = React.useState(noteConfig().fontSize || 24);
+  const [lineWrapOn, setLineWrapOn] = React.useState(noteConfig().lineWrapOn);
+
+  const onFontSizeChange = (action) => {
+    let payload = fontSize;
+    if (action === 'INCREASE' && fontSize < 60) payload = fontSize + 4;
+    if (action === 'DECREASE' && fontSize > 12) payload = fontSize - 4;
+    setFontSize(payload)
+    saveLocalStorage('gd-notes-config', { ...noteConfig(), fontSize: payload });
+  };
 
   const onToggleLineWrap = () => {
     setLineWrapOn(!lineWrapOn);
+    saveLocalStorage('gd-notes-config', { ...noteConfig(), lineWrapOn: !lineWrapOn });
   }
+
+  // console.log('Content: noteConfig...', noteConfig());
 
   return (
     <div className="container-fluid">
@@ -37,6 +61,7 @@ const Content = () => {
         fontSize={fontSize}
         lineWrapOn={lineWrapOn}
         onToggleLineWrap={onToggleLineWrap}
+        onFontSizeChange={onFontSizeChange}
       />
     </div>
   );

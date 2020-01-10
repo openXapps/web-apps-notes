@@ -6,7 +6,7 @@ const Value = ({ v }) => {
   );
 }
 
-const Footer = ({ noteLength, fontSize, lineWrapOn, onToggleLineWrap }) => {
+const Footer = (props) => {
   // console.log('Footer: lineWrapOn...', lineWrapOn);
   return (
     <div className="fixed-bottom">
@@ -15,12 +15,26 @@ const Footer = ({ noteLength, fontSize, lineWrapOn, onToggleLineWrap }) => {
           <button
             className="btn btn-outline-primary btn-sm"
             type="button"
-            onClick={onToggleLineWrap}
-          >line wrap is {lineWrapOn ? 'on' : 'off'}</button>
+            onClick={props.onToggleLineWrap}
+          >line wrap is {props.lineWrapOn ? 'on' : 'off'}</button>
+          <button
+            className="btn btn-outline-primary btn-sm ml-2"
+            type="button"
+            onClick={() => { props.onFontSizeChange('INCREASE') }}
+          ><i className="fas fa-search-plus gd-nav-btn-icon"></i><span
+            className="pl-1 d-none d-sm-inline"
+          >Zoom In</span></button>
+          <button
+            className="btn btn-outline-primary btn-sm ml-2"
+            type="button"
+            onClick={() => { props.onFontSizeChange('DECREASE') }}
+          ><i className="fas fa-search-minus gd-nav-btn-icon"></i><span
+            className="pl-1 d-none d-sm-inline"
+          >Zoom Out</span></button>
         </div>
         <div className="d-flex flex-row align-items-center">
-          <div className="p-1 small text-white">note length <Value v={noteLength} /></div>
-          <div className="p-1 small text-white">font size <Value v={fontSize} /></div>
+          <div className="p-1 small text-white">note length <Value v={props.noteLength} /></div>
+          <div className="p-1 small text-white d-none d-sm-inline">font size <Value v={props.fontSize} /></div>
         </div>
       </div>
     </div>
