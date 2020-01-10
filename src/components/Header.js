@@ -31,7 +31,8 @@ const Header = () => {
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a className="navbar-brand" href="/"><i className="fas fa-home"> OpenApps</i></a>
+      <a className="navbar-brand m-0" href="/"><i className="fas fa-home"></i></a>
+      <span className="navbar-text h4 pt-1 pb-0 pl-0 pl-sm-2 text-white">Quick Notes</span>
       <button
         className="navbar-toggler px-1"
         type="button"
