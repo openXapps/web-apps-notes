@@ -5,10 +5,14 @@ import { NoteContext } from '../context/NoteProvider';
 import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
 import { atou } from '../utilities/base64';
 
-const NoteLabel = ({ noteTitle, noteDate }) => {
+const NoteLabel = ({ index, noteTitle, noteDate }) => {
   return (
     <>
-      <span>{noteTitle}</span> <span className="d-none d-md-inline float-right">{noteDate}</span>
+      <span
+        data-id={index}
+      >{noteTitle}</span> <span
+        className="d-none d-md-inline float-right text-light small" data-id={index}
+      >{noteDate}</span>
     </>
   );
 };
@@ -40,6 +44,7 @@ const Open = () => {
   }, [])
 
   const onNoteOpen = (e) => {
+    // console.log('Open: e.target...', e.target);
     // const targetId = notes[e.target.dataset.id].noteId;
     onNoteIdChange(notes[e.target.dataset.id].noteId);
     onNoteTitleChange(notes[e.target.dataset.id].noteTitle);
@@ -95,7 +100,10 @@ const Open = () => {
                         disabled={noteId === obj.noteId}
                         data-id={index}
                         onClick={onNoteOpen}
-                      ><NoteLabel noteTitle={obj.noteTitle} noteDate={moment(obj.noteDate).format('ddd, MMM Do YYYY, HH:mm')} /></button>
+                      ><NoteLabel
+                          index={index}
+                          noteTitle={obj.noteTitle}
+                          noteDate={moment(obj.noteDate).format('ddd, MMM Do YYYY, HH:mm')} /></button>
                     </div>
                     <div className="flex-grow-0 flex-shrink-0">
                       <div className="d-block ml-2">
