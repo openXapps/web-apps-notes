@@ -25,7 +25,7 @@ function App() {
           <Route path="/save"><Save /></Route>
           <Route path="/download"><Download /></Route>
           <Route path="/upload"><Upload /></Route>
-          <Route path="/"><Content /></Route>
+          <Route path="/" exact><Content /></Route>
           <Route><PageNotFound /></Route>
         </Switch>
       </Router>
