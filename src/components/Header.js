@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
       <a className="navbar-brand m-0" href="/"><i className="fas fa-home"></i></a>
-      <span className="navbar-text h4 pt-1 pb-0 pl-0 pl-sm-2 text-white">Quick Notes</span>
+      <span className="navbar-text p-0 ml-0 ml-sm-2 text-white gd-navbar-header">Quick Notes</span>
       <button
         className="navbar-toggler px-1"
         type="button"
