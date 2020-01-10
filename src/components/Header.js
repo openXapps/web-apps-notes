@@ -44,7 +44,7 @@ const Header = () => {
       </button>
 
       <div className="collapse navbar-collapse" id="gd-navbar-content">
-        <ul className="navbar-nav mr-auto">
+        <ul className="navbar-nav ml-auto">
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <Link
               className={navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-primary w-100'}
@@ -96,7 +96,7 @@ const Header = () => {
             ><i className="fas fa-toolbox gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
             >Tool Box</span></button>
-            <div className="dropdown-menu shadow mt-2" aria-labelledby="gd-dropdown-toolbox">
+            <div className="dropdown-menu dropdown-menu-right shadow mt-2" aria-labelledby="gd-dropdown-toolbox">
               <button
                 className="dropdown-item"
                 type="button"
