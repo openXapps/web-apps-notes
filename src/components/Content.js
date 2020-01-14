@@ -47,8 +47,8 @@ const Content = () => {
 
   return (
     <div className="container-fluid">
-      <div className="h5">{noteTitle}</div>
-      <div className="w-100 border gd-textarea">
+      <div className="h5 text-info">{noteTitle}</div>
+      <div className="w-100 gd-textarea">
         <textarea
           id='gd-note'
           style={lineWrapOn ? ({
@@ -61,7 +61,7 @@ const Content = () => {
             overflowWrap: 'normal',
             overflowX: 'auto'
           })}
-          className="w-100 h-100 border-0 p-2 text-dark"
+          className="w-100 h-100 rounded-lg p-2 text-dark"
           placeholder="Start to type something..."
           value={noteContent}
           onChange={(e) => { onNoteContentChange(e.target.value, noteHashRef.current) }}
