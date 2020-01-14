@@ -1,4 +1,5 @@
 import React from 'react';
+import md5 from 'md5';
 import Footer from './Footer';
 import { NoteContext } from '../context/NoteProvider';
 import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
@@ -11,13 +12,22 @@ const noteConfig = () => {
   const config = getLocalStorage('gd-notes-config');
   return config.statusOK ? config.data : {
     fontSize: (config.data.fontSize ? config.data.fontSize : 24),
-    lineWrapOn: true };
+    lineWrapOn: true
+  };
 };
 
 const Content = () => {
   const { noteTitle, noteContent, onNoteContentChange } = React.useContext(NoteContext);
   const [fontSize, setFontSize] = React.useState(noteConfig().fontSize || 24);
   const [lineWrapOn, setLineWrapOn] = React.useState(noteConfig().lineWrapOn);
+  const noteHashRef = React.useRef(null);
+
+  // Effect to set instance ref of note hash key
+  React.useEffect(() => {
+    noteHashRef.current = md5(noteContent);
+    return () => { }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onFontSizeChange = (action) => {
     let payload = fontSize;
@@ -33,6 +43,7 @@ const Content = () => {
   }
 
   // console.log('Content: noteConfig...', noteConfig());
+  // console.log('Content: noteHashRef.current...', noteHashRef.current);
 
   return (
     <div className="container-fluid">
@@ -53,7 +64,7 @@ const Content = () => {
           className="w-100 h-100 border-0 p-2 text-dark"
           placeholder="Start to type something..."
           value={noteContent}
-          onChange={(e) => { onNoteContentChange(e.target.value) }}
+          onChange={(e) => { onNoteContentChange(e.target.value, noteHashRef.current) }}
         ></textarea>
       </div>
       <Footer

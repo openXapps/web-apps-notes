@@ -50,13 +50,13 @@ const Upload = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleNotesChange = (e) => {
-        if (e.target.value && (overwriteButton.isDisabled || appendButton.isDisabled)) {
+    const handleNotesChange = (ev) => {
+        if (ev.target.value && (overwriteButton.isDisabled || appendButton.isDisabled)) {
             setOverwriteButton({ label: overwriteButtonDefault.label, isDisabled: false });
             setAppendButton({ label: appendButtonDefault.label, isDisabled: false });
             setIsSaved(false);
         }
-        setNotesContent(e.target.value);
+        setNotesContent(ev.target.value);
     };
 
     const handleOverwrite = () => {

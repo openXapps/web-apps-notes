@@ -1,4 +1,5 @@
 import React from 'react';
+import md5 from 'md5';
 
 export const NoteContext = React.createContext();
 
@@ -21,16 +22,6 @@ const NoteProvider = (props) => {
   const [isSaved, setIsSaved] = React.useState(true);
   const [navbarLocked, setNavbarLocked] = React.useState(false);
 
-
-  React.useEffect(() => {
-    if (noteContent) {
-      setIsSaved(false);
-    } else {
-      setIsSaved(true);
-    }
-    return () => { };
-  }, [noteContent]);
-
   const onNoteIdChange = (v) => {
     setNoteId(v);
   };
@@ -39,18 +30,33 @@ const NoteProvider = (props) => {
     setNoteTitle(v);
   };
 
-  const onNoteContentChange = (v) => {
-    // v not empty and isEmpty true
-    if (v && isEmpty) {
-      setIsEmpty(false);
-    }
-    // v empty and isEmpty not true
-    if (!v && !isEmpty) {
+  /**
+   * Handles note content change event
+   * @param {string} noteValue Current note content
+   * @param {string} noteHashPrevious MD5 hash key of previous note content
+   */
+  const onNoteContentChange = (noteValue, noteHashPrevious) => {
+    const noteHashCurrent = md5(noteValue);
+    // console.log('NoteProvider: onNoteContentChange.MD5.previous...', noteHashPrevious);
+    // console.log('NoteProvider: onNoteContentChange.MD5.current....', noteHashCurrent);
+    // Note hash keys match and not saved
+    if ((noteHashCurrent === noteHashPrevious) && !isSaved) setIsSaved(true);
+    // Note hash keys mismatch and saved
+    if ((noteHashCurrent !== noteHashPrevious) && isSaved) setIsSaved(false);
+    // noteValue not empty and isEmpty true
+    if (noteValue && isEmpty) setIsEmpty(false);
+    // noteValue empty and isEmpty not true
+    if (!noteValue && !isEmpty) {
       setIsEmpty(true);
+      setIsSaved(true);
       setNoteId('');
       setNoteTitle(defaultNoteTitle);
     }
-    setNoteContent(v);
+    setNoteContent(noteValue);
+  };
+
+  const onSetIsSaved = (state) => {
+    setIsSaved(state);
   };
 
   const onCopy = (elementId) => {
@@ -97,6 +103,7 @@ const NoteProvider = (props) => {
         onCaseChange: onCaseChange,
         onTrimSpaces: onTrimSpaces,
         onCopy: onCopy,
+        onSetIsSaved: onSetIsSaved,
         isEmpty: isEmpty,
         isSaved: isSaved,
         navbarLocked: navbarLocked,

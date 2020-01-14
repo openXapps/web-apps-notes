@@ -12,33 +12,37 @@ const Save = () => {
   const routeHistory = useHistory();
   const routeMatch = useRouteMatch();
   const [componentTitle, setComponentTitle] = React.useState('');
-  const [previousTitle, setPreviousTitle] = React.useState('');
+  // const [noteTitlePrevious, setNoteTitlePrevious] = React.useState('');
+  const [noteTitleNew, setNoteTitleNew] = React.useState('');
+  const [noteIdNew, setNoteIdNew] = React.useState(uuidv1());
   const [mode, setMode] = React.useState('NEW');
-  const [noteId, setNoteId] = React.useState('');
+  // const [noteId, setNoteId] = React.useState('');
   const textInput = React.useRef();
   const {
     noteTitle,
     noteContent,
     onNoteIdChange,
     onNoteTitleChange,
+    onSetIsSaved,
     toggleNavbarLock
   } = React.useContext(NoteContext);
 
   // Run once
   React.useEffect(() => {
-    setPreviousTitle(noteTitle);
+    // setNoteTitlePrevious(noteTitle);
     // Set route mode
     if (routeMatch.path === '/save') {
       setMode('NEW');
       setComponentTitle('New note');
-      setNoteId(uuidv1());
-      // console.log('Save: previousTitle...', previousTitle);
+      // console.log('Save: noteTitlePrevious...', noteTitlePrevious);
       // console.log('Save: noteTitle.......', noteTitle);
-      if (noteTitle === 'Untitled note - Save to set a title') onNoteTitleChange('');
+      // Blank out input value if new note detected
+      if (noteTitle === 'Untitled note - Save to set a title') setNoteTitleNew('');
     } else {
       setMode('EDIT');
       setComponentTitle('Edit note');
-      setNoteId(routeMatch.params.noteId);
+      setNoteTitleNew(noteTitle);
+      setNoteIdNew(routeMatch.params.noteId);
     }
     // Set focus to input element
     textInput.current.focus();
@@ -50,34 +54,36 @@ const Save = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleSave = (e) => {
-    e.preventDefault();
+  const handleTitleChange = (ev) => {
+    setNoteTitleNew(ev.target.value);
+  };
+
+  const handleSave = (ev) => {
+    ev.preventDefault();
     let savedNotes = getLocalStorage('gd-notes', null, null);
     let tempNotes = [];
     switch (mode) {
       case 'NEW':
         savedNotes.data.push({
-          noteId: noteId,
-          noteTitle: noteTitle,
+          noteId: noteIdNew,
+          noteTitle: noteTitleNew,
           // noteContent: window.btoa(unescape(encodeURIComponent(noteContent))),
           noteContent: utoa(noteContent),
           noteDate: new Date(),
           favourite: false
         });
         // console.log('Save: notes.NEW...', savedNotes);
-        onNoteIdChange(noteId);
         saveLocalStorage('gd-notes', savedNotes.data);
+        onNoteIdChange(noteIdNew);
         break;
       case 'EDIT':
-        savedNotes.data.forEach((v, i, a) => {
+        savedNotes.data.forEach((v) => {
           // Update existing note
-          if (noteId === v.noteId) {
+          if (noteIdNew === v.noteId) {
             tempNotes.push({
               ...v,
-              noteTitle: noteTitle,
-              noteContent: window.btoa(unescape(encodeURIComponent(noteContent))),
-              noteDate: new Date(),
-              favourite: false
+              noteTitle: noteTitleNew,
+              noteDate: new Date()
             })
           } else { tempNotes.push({ ...v }) }
         })
@@ -88,15 +94,12 @@ const Save = () => {
         // Nothing to do
         break;
     };
+    onNoteTitleChange(noteTitleNew);
+    onSetIsSaved(true);
     routeHistory.goBack();
   };
 
-  const handleCancel = () => {
-    if (noteTitle !== previousTitle) onNoteTitleChange(previousTitle);
-    routeHistory.goBack();
-  };
-
-  // console.log('Save: previousTitle...', previousTitle);
+  // console.log('Save: noteTitlePrevious...', noteTitlePrevious);
 
   return (
     <div className="container">
@@ -110,8 +113,8 @@ const Save = () => {
               placeholder="Title"
               name="noteTitle"
               ref={textInput}
-              value={noteTitle}
-              onChange={e => onNoteTitleChange(e.target.value)}
+              value={noteTitleNew}
+              onChange={handleTitleChange}
               required={true}
             />
             <button
@@ -121,7 +124,7 @@ const Save = () => {
             <button
               className="btn btn-outline-light ml-2"
               type="button"
-              onClick={handleCancel}
+              onClick={() => { routeHistory.goBack() }}
             >Cancel</button>
           </div>
         </form>

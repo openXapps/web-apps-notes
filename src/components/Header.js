@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import md5 from 'md5';
 import { NoteContext } from '../context/NoteProvider';
 
 const Header = () => {
@@ -16,8 +17,8 @@ const Header = () => {
   } = React.useContext(NoteContext);
 
   // Tries to toggle the navbar
-  const collapseNavBar = (e) => {
-    const currentElement = e.target.name ? e.target.name : '';
+  const collapseNavBar = (ev) => {
+    const currentElement = ev.target.name ? ev.target.name : '';
     // console.log ('Header: collapseNavBar.currentElement...', currentElement);
     let elToggler = document.getElementsByClassName('navbar-toggler');
     let elBar = document.getElementById('gd-navbar-content');
@@ -26,8 +27,10 @@ const Header = () => {
     }
     toggleNavbarLock();
     // Upload button will clear current note
-    if (currentElement === 'gd-navbar-upload' && noteId) onNoteContentChange('');
+    if (currentElement === 'gd-navbar-upload' && noteId) onNoteContentChange('', md5(''));
   };
+
+    // console.log ('Header: isSaved...', isSaved);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -58,7 +61,7 @@ const Header = () => {
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <Link
-              className={isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-primary w-100'}
+              className={isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-info w-100'}
               to={noteId ? `/save/${noteId}` : '/save'}
               role="button"
               onClick={collapseNavBar}
@@ -71,7 +74,7 @@ const Header = () => {
               className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty || navbarLocked}
-              onClick={() => { onNoteContentChange('') }}
+              onClick={() => { onNoteContentChange('', md5('')) }}
             ><i className="fas fa-broom gd-nav-btn-icon"></i><span
               className="pl-1 d-md-inline d-sm-none"
             >Clear</span></button>

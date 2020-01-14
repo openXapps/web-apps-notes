@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import md5 from 'md5';
 import { NoteContext } from '../context/NoteProvider';
 import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
 import { atou } from '../utilities/base64';
@@ -46,13 +47,14 @@ const Open = () => {
   const onNoteOpen = (e) => {
     // console.log('Open: e.target...', e.target);
     // const targetId = notes[e.target.dataset.id].noteId;
+    const openedNote = atou(notes[e.target.dataset.id].noteContent);
     onNoteIdChange(notes[e.target.dataset.id].noteId);
     onNoteTitleChange(notes[e.target.dataset.id].noteTitle);
     // onNoteContentChange(window.atob(notes[e.target.dataset.id].noteContent));
-    onNoteContentChange(atou(notes[e.target.dataset.id].noteContent));
+    onNoteContentChange(openedNote, md5(openedNote));
     // console.log('Open: open button...', targetId);
     // console.log('Open: open button...', window.atob(notes[e.target.dataset.id].noteContent));
-    saveLocalStorage('gd-notes', notes);
+    // saveLocalStorage('gd-notes', notes);
     routeHistory.goBack();
   };
 
