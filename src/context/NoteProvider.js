@@ -72,10 +72,13 @@ const NoteProvider = (props) => {
   const onCaseChange = (action) => {
     if (action === 'UPPER') setNoteContent(noteContent.toUpperCase());
     if (action === 'LOWER') setNoteContent(noteContent.toLowerCase());
+    setIsSaved(false);
   };
 
   const onTrimSpaces = () => {
     let result = noteContent;
+    const resultHash = md5(result);
+    // console.log('NoteProvider: resultHash.before...', resultHash);
     // Find basic space
     result = result.replace(/\u0020{2,}/gm, ' ');
     // Find basic return or new line + space
@@ -83,7 +86,11 @@ const NoteProvider = (props) => {
     // Find basic space + return or new line
     result = result.replace(/\u0020{1,}(\n|\r)/gm, '\n');
     result = result.trim();
-    setNoteContent(result);
+    // console.log('NoteProvider: resultHash.after....', md5(result));
+    if (resultHash !== md5(result)) {
+      setIsSaved(false);
+      setNoteContent(result);
+    }
   }
 
   const toggleNavbarLock = (state) => {

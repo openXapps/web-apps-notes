@@ -83,7 +83,9 @@ const Save = () => {
             tempNotes.push({
               ...v,
               noteTitle: noteTitleNew,
-              noteDate: new Date()
+              noteContent: utoa(noteContent),
+              noteDate: new Date(),
+              favourite: false
             })
           } else { tempNotes.push({ ...v }) }
         })
