@@ -54,14 +54,17 @@ const Download = () => {
         <div className="container">
             <div className="border border-primary rounded-lg my-2 p-3">
                 <h5 className="mb-2">Download Notes</h5>
-                {isLoading ? (<p>Loading...</p>) : (<p>Copy content to a text file</p>)}
+                {isLoading ? (<p>Loading...</p>) : (copyButton.label === 'COPIED' ? (
+                    <p>Notes copied to clipboard! Paste to file and save</p>) : (
+                        <p>Click Copy button below</p>
+                    ))}
                 <textarea
                     className="text-monospace text-muted w-100 mb-2 gd-textarea-download"
                     defaultValue={notes}
                     id="gd-note-to-copy"
                 ></textarea>
                 <button
-                    className="btn btn-outline-light"
+                    className={copyButton.isDisabled ? ('btn btn-outline-light') : ('btn btn-outline-info')}
                     type="button"
                     disabled={copyButton.isDisabled}
                     onClick={handleCopy}

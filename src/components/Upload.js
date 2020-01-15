@@ -4,6 +4,12 @@ import uuidv1 from 'uuid/v1';
 import { NoteContext } from '../context/NoteProvider';
 import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
 
+const buttonClass = {
+    mute: 'btn btn-outline-light',
+    action: 'btn btn-outline-info',
+    success: 'btn btn-outline-success',
+    error: 'btn btn-outline-warning'
+};
 const overwriteButtonDefault = { label: 'Overwrite All Notes', isDisabled: true };
 const appendButtonDefault = { label: 'Append To Existing Notes', isDisabled: true };
 const notesValidator = (notes) => {
@@ -35,7 +41,6 @@ const notesValidator = (notes) => {
 
 const Upload = () => {
     const routerHistory = useHistory();
-    const [isSaved, setIsSaved] = React.useState(false);
     const [notesContent, setNotesContent] = React.useState('');
     const [overwriteButton, setOverwriteButton] = React.useState(overwriteButtonDefault);
     const [appendButton, setAppendButton] = React.useState(appendButtonDefault);
@@ -54,7 +59,6 @@ const Upload = () => {
         if (ev.target.value && (overwriteButton.isDisabled || appendButton.isDisabled)) {
             setOverwriteButton({ label: overwriteButtonDefault.label, isDisabled: false });
             setAppendButton({ label: appendButtonDefault.label, isDisabled: false });
-            setIsSaved(false);
         }
         setNotesContent(ev.target.value);
     };
@@ -64,10 +68,8 @@ const Upload = () => {
         if (validation.isValid) {
             saveLocalStorage('gd-notes', validation.notes);
             setOverwriteButton({ label: 'SAVED', isDisabled: true });
-            setIsSaved(true);
         } else {
             setOverwriteButton({ label: 'ERROR', isDisabled: true });
-            setIsSaved(false);
         }
         setAppendButton({ label: appendButtonDefault.label, isDisabled: true });
     };
@@ -85,10 +87,8 @@ const Upload = () => {
             // console.log('Upload: handleAppend.tempNotes...', tempNotes);
             saveLocalStorage('gd-notes', storedNotes.concat(tempNotes));
             setAppendButton({ label: 'SAVED', isDisabled: true });
-            setIsSaved(true);
         } else {
             setAppendButton({ label: 'ERROR', isDisabled: true });
-            setIsSaved(false);
         }
         setOverwriteButton({ label: overwriteButton.label, isDisabled: true });
     };
@@ -97,7 +97,11 @@ const Upload = () => {
         <div className="container">
             <div className="border border-primary rounded-lg my-2 p-3">
                 <h5 className="mb-2">Upload Notes</h5>
-                {!isSaved ? (<p>Paste notes and click Overwrite or Append</p>) : (<p>Your upload is complete!</p>)}
+                {overwriteButton.label === 'ERROR' || appendButton.label === 'ERROR' ? (
+                    <p className="text-warning">Your upload content failed validation!</p>) : (
+                        overwriteButton.label === 'SAVED' || appendButton.label === 'SAVED' ? (
+                            <p>Your upload is complete!</p>) : (<p>Paste notes and click Overwrite or Append</p>)
+                    )}
                 <textarea
                     className="text-monospace text-muted w-100 mb-2 gd-textarea-upload"
                     ref={textArea}
@@ -107,7 +111,10 @@ const Upload = () => {
                 <div className="d-flex">
                     <div className="">
                         <button
-                            className={overwriteButton.label === 'ERROR' ? ('btn btn-outline-info') : ('btn btn-outline-light')}
+                            className={overwriteButton.label === 'ERROR' ? (buttonClass.error) : (
+                                overwriteButton.label === 'SAVED' ? (buttonClass.success) : (
+                                    overwriteButton.isDisabled ? (buttonClass.mute) : (buttonClass.action)
+                                ))}
                             type="button"
                             disabled={overwriteButton.isDisabled}
                             onClick={handleOverwrite}
@@ -115,7 +122,10 @@ const Upload = () => {
                     </div>
                     <div className="ml-2">
                         <button
-                            className={appendButton.label === 'ERROR' ? ('btn btn-outline-info') : ('btn btn-outline-light')}
+                            className={appendButton.label === 'ERROR' ? (buttonClass.error) : (
+                                appendButton.label === 'SAVED' ? (buttonClass.success) : (
+                                    appendButton.isDisabled ? (buttonClass.mute) : (buttonClass.action)
+                                ))}
                             type="button"
                             disabled={appendButton.isDisabled}
                             onClick={handleAppend}

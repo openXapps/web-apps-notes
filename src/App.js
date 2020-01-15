@@ -13,8 +13,8 @@ import PageNotFound from './components/PageNotFound';
 
 function App() {
   // https://medium.com/@svinkle/how-to-deploy-a-react-app-to-a-subdirectory-f694d46427c1
-  const root = '/apps/web-apps-notes';
-  // const root = '/';
+  // const root = '/apps/web-apps-notes';
+  const root = '/';
   // https://reacttraining.com/blog/react-router-v5-1/
   return (
     <NoteProvider>

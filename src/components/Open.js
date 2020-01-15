@@ -125,7 +125,7 @@ const Open = () => {
           </ul>
         ) : (<div className="my-3">No saved notes found</div>)}
         <button
-          className="btn btn-outline-light"
+          className={isDeleteEmpty ? 'btn btn-outline-light' : 'btn btn-outline-info'}
           type="button"
           disabled={isDeleteEmpty}
           onClick={onConfirmDelete}
