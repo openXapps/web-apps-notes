@@ -12,7 +12,8 @@ const noteConfig = () => {
   const config = getLocalStorage('gd-notes-config');
   return config.statusOK ? config.data : {
     fontSize: (config.data.fontSize ? config.data.fontSize : 24),
-    lineWrapOn: true
+    lineWrapOn: true,
+    spellCheckOn: true
   };
 };
 
@@ -20,6 +21,7 @@ const Content = () => {
   const { noteTitle, noteContent, onNoteContentChange } = React.useContext(NoteContext);
   const [fontSize, setFontSize] = React.useState(noteConfig().fontSize || 24);
   const [lineWrapOn, setLineWrapOn] = React.useState(noteConfig().lineWrapOn);
+  const [spellCheckOn, setSpellCheckOn] = React.useState(noteConfig().spellCheckOn);
   const noteHashRef = React.useRef(null);
 
   // Effect to set instance ref of note hash key
@@ -42,14 +44,20 @@ const Content = () => {
     saveLocalStorage('gd-notes-config', { ...noteConfig(), lineWrapOn: !lineWrapOn });
   }
 
+  const onToggleSpellCheck = () => {
+    setSpellCheckOn(!spellCheckOn);
+    saveLocalStorage('gd-notes-config', { ...noteConfig(), spellCheckOn: !spellCheckOn });
+  }
+
   // console.log('Content: noteConfig...', noteConfig());
   // console.log('Content: noteHashRef.current...', noteHashRef.current);
 
   return (
     <div className="container-fluid">
       <div className="h5 text-info">{noteTitle}</div>
-      <div className="w-100 gd-textarea">
+      <div className="w-100 gd-textarea-container">
         <textarea
+          className="w-100 h-100 p-2 text-dark rounded-lg border-0"
           id='gd-note'
           style={lineWrapOn ? ({
             fontSize: fontSize,
@@ -61,8 +69,9 @@ const Content = () => {
             overflowWrap: 'normal',
             overflowX: 'auto'
           })}
-          className="w-100 h-100 rounded-lg p-2 text-dark"
           placeholder="Start to type something..."
+          spellCheck={spellCheckOn}
+          maxLength="1000000"
           value={noteContent}
           onChange={(e) => { onNoteContentChange(e.target.value, noteHashRef.current) }}
         ></textarea>
@@ -71,7 +80,9 @@ const Content = () => {
         noteLength={noteContent.length}
         fontSize={fontSize}
         lineWrapOn={lineWrapOn}
+        spellCheckOn={spellCheckOn}
         onToggleLineWrap={onToggleLineWrap}
+        onToggleSpellCheck={onToggleSpellCheck}
         onFontSizeChange={onFontSizeChange}
       />
     </div>

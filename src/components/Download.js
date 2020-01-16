@@ -59,7 +59,7 @@ const Download = () => {
                         <p>Click Copy button below</p>
                     ))}
                 <textarea
-                    className="text-monospace text-muted w-100 mb-2 gd-textarea-download"
+                    className="text-monospace text-muted w-100 mb-2 rounded-lg border-0 gd-textarea-download"
                     defaultValue={notes}
                     id="gd-note-to-copy"
                 ></textarea>

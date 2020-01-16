@@ -103,7 +103,7 @@ const Upload = () => {
                             <p>Your upload is complete!</p>) : (<p>Paste notes and click Overwrite or Append</p>)
                     )}
                 <textarea
-                    className="text-monospace text-muted w-100 mb-2 gd-textarea-upload"
+                    className="text-monospace text-muted w-100 mb-2 rounded-lg border-0 gd-textarea-upload"
                     ref={textArea}
                     value={notesContent}
                     onChange={handleNotesChange}

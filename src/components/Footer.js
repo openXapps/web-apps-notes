@@ -18,18 +18,23 @@ const Footer = (props) => {
             onClick={props.onToggleLineWrap}
           >line wrap is <span className="text-info">{props.lineWrapOn ? 'on' : 'off'}</span></button>
           <button
+            className="btn btn-outline-primary btn-sm ml-2 d-none d-sm-inline"
+            type="button"
+            onClick={props.onToggleSpellCheck}
+          >spellcheck is <span className="text-info">{props.spellCheckOn ? 'on' : 'off'}</span></button>
+          <button
             className="btn btn-outline-primary btn-sm ml-2"
             type="button"
             onClick={() => { props.onFontSizeChange('INCREASE') }}
           ><i className="fas fa-search-plus gd-nav-btn-icon"></i><span
-            className="pl-1 d-none d-sm-inline"
+            className="pl-1 d-none d-md-inline"
           >Zoom In</span></button>
           <button
             className="btn btn-outline-primary btn-sm ml-2"
             type="button"
             onClick={() => { props.onFontSizeChange('DECREASE') }}
           ><i className="fas fa-search-minus gd-nav-btn-icon"></i><span
-            className="pl-1 d-none d-sm-inline"
+            className="pl-1 d-none d-md-inline"
           >Zoom Out</span></button>
         </div>
         <div className="d-flex flex-row align-items-center">
