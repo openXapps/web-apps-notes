@@ -10,6 +10,10 @@ import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
  */
 const noteConfig = () => {
   const config = getLocalStorage('gd-notes-config');
+  if (config.statusOK) {
+    if (!('lineWrapOn' in config.data)) config.data = { ...config.data, lineWrapOn: true }
+    if (!('spellCheckOn' in config.data)) config.data = { ...config.data, spellCheckOn: true }
+  }
   return config.statusOK ? config.data : {
     fontSize: (config.data.fontSize ? config.data.fontSize : 24),
     lineWrapOn: true,
