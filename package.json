@@ -5,6 +5,7 @@
   "homepage": "https://www.openapps.co.za/apps/web-apps-notes",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "clipboard": "^2.0.4",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",

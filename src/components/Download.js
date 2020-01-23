@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import ClipboardJS from 'clipboard';
 import { NoteContext } from '../context/NoteProvider';
 
 /**
@@ -26,7 +27,13 @@ const Download = () => {
     const { toggleNavbarLock } = React.useContext(NoteContext);
 
     React.useEffect(() => {
+        // https://clipboardjs.com/
+        const clipboard = new ClipboardJS('#gd-btn-copy');
         const tempNotes = stringPop(localStorage.getItem('gd-notes'));
+        clipboard.on('success', (e) => {
+            setCopyButton({ label: 'COPIED', isDisabled: true });
+            e.clearSelection();
+        });
         if (tempNotes) {
             setTimeout(() => {
                 setNotes(tempNotes);
@@ -35,20 +42,22 @@ const Download = () => {
             }, 1000);
         }
         return () => {
+            clipboard.destroy();
             toggleNavbarLock();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleCopy = () => {
+    // Old conventional way of clipping replaced by ClipboardJS
+    // const handleCopy = () => {
         /* Get text field element ref */
-        let copyText = document.getElementById('gd-note-to-copy');
+        // let copyText = document.getElementById('gd-note-to-copy');
         /* Select text in field */
-        copyText.select();
+        // copyText.select();
         /* Copy selected text */
-        document.execCommand('copy');
-        setCopyButton({ label: 'COPIED', isDisabled: true });
-    };
+        // document.execCommand('copy');
+        // setCopyButton({ label: 'COPIED', isDisabled: true });
+    // };
 
     return (
         <div className="container">
@@ -65,9 +74,11 @@ const Download = () => {
                 ></textarea>
                 <button
                     className={copyButton.isDisabled ? ('btn btn-outline-light') : ('btn btn-outline-info')}
+                    id="gd-btn-copy"
                     type="button"
+                    data-clipboard-target="#gd-note-to-copy"
                     disabled={copyButton.isDisabled}
-                    onClick={handleCopy}
+                // onClick={handleCopy}
                 >{copyButton.label}</button>
                 <button
                     className="btn btn-outline-light ml-2"
