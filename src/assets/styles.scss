@@ -125,6 +125,7 @@ textarea:focus {
 
 .gd-textarea-container {
   height: calc(100vh - 139px);
+  min-height: 300px;
 }
 
 .gd-textarea-download,
