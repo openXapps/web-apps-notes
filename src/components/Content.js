@@ -29,6 +29,7 @@ const Content = () => {
   const noteHashRef = React.useRef(null);
 
   // Effect to set instance ref of note hash key
+  // This helps keeping the hash key persistent during re-render
   React.useEffect(() => {
     noteHashRef.current = md5(noteContent);
     return () => { }

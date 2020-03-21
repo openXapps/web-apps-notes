@@ -2,13 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import md5 from 'md5';
 import { NoteContext } from '../context/NoteProvider';
+import { getLocalStorage, saveLocalStorage } from '../utilities/localstorage';
+import { utoa } from '../utilities/base64';
 
 const Header = () => {
   const {
     noteId,
+    noteTitle,
+    noteContent,
     isEmpty,
     isSaved,
     navbarLocked,
+    onSetIsSaved,
     onNoteContentChange,
     onCopy,
     onCaseChange,
@@ -30,7 +35,28 @@ const Header = () => {
     if (currentElement === 'gd-navbar-upload' && noteId) onNoteContentChange('', md5(''));
   };
 
-    // console.log ('Header: isSaved...', isSaved);
+  const handleSave = (ev) => {
+    ev.preventDefault();
+    let savedNotes = getLocalStorage('gd-notes', null, null);
+    let tempNotes = [];
+    savedNotes.data.forEach((v) => {
+      // Update existing note
+      if (noteId === v.noteId) {
+        tempNotes.push({
+          ...v,
+          noteTitle: noteTitle,
+          noteContent: utoa(noteContent),
+          noteDate: new Date(),
+          favourite: false
+        })
+      } else { tempNotes.push({ ...v }) }
+    })
+    // console.log('Save: notes.EDIT...', tempNotes);
+    saveLocalStorage('gd-notes', tempNotes);
+    onSetIsSaved(true);
+  };
+
+  // console.log ('Header: isSaved...', isSaved);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -56,18 +82,28 @@ const Header = () => {
               role="button"
               onClick={collapseNavBar}
             ><i className="fas fa-folder-open gd-nav-btn-icon"></i><span
-              className="pl-1 d-md-inline d-sm-none"
+              className="pl-1 d-lg-inline d-none"
             >Open</span></Link>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
+            <button
+              className={!(noteId) || isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-info w-100'}
+              type="button"
+              disabled={!(noteId) || navbarLocked}
+              onClick={handleSave}
+            ><i className="fas fa-save gd-nav-btn-icon"></i><span
+              className="pl-1 d-lg-inline d-none"
+            >Save</span></button>
+          </li>
+          <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0 gd-nav-btn-save-as">
             <Link
               className={isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-info w-100'}
               to={noteId ? `/save/${noteId}` : '/save'}
               role="button"
               onClick={collapseNavBar}
-            ><i className="fas fa-save gd-nav-btn-icon"></i><span
-              className="pl-1 d-md-inline d-sm-none"
-            >Save</span></Link>
+            ><i className="far fa-save gd-nav-btn-icon"></i><span
+              className="pl-1 d-lg-inline d-none"
+            >Save As</span></Link>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
@@ -76,7 +112,7 @@ const Header = () => {
               disabled={isEmpty || navbarLocked}
               onClick={() => { onNoteContentChange('', md5('')) }}
             ><i className="fas fa-broom gd-nav-btn-icon"></i><span
-              className="pl-1 d-md-inline d-sm-none"
+              className="pl-1 d-lg-inline d-none"
             >Clear</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
@@ -86,7 +122,7 @@ const Header = () => {
               disabled={isEmpty || navbarLocked}
               onClick={() => onCopy('gd-note')}
             ><i className="fas fa-copy gd-nav-btn-icon"></i><span
-              className="pl-1 d-md-inline d-sm-none"
+              className="pl-1 d-lg-inline d-none"
             >Copy</span></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
@@ -98,7 +134,7 @@ const Header = () => {
               aria-haspopup="true"
               aria-expanded="false"
             ><i className="fas fa-toolbox gd-nav-btn-icon"></i><span
-              className="pl-1 d-md-inline d-sm-none"
+              className="pl-1 d-lg-inline d-none"
             >Tool Box</span></button>
             <div className="dropdown-menu dropdown-menu-right shadow mt-2" aria-labelledby="gd-dropdown-toolbox">
               <button

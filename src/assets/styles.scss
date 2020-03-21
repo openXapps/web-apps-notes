@@ -119,13 +119,17 @@ textarea:focus {
   height: 16px;
 }
 
+.gd-nav-btn-save-as:hover {
+  cursor: pointer !important;
+}
+
 .gd-navbar-header {
   font-size: x-large;
 }
 
 .gd-textarea-container {
   height: calc(100vh - 139px);
-  min-height: 300px;
+  // min-height: 300px;
 }
 
 .gd-textarea-download,
