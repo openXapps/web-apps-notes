@@ -23,7 +23,7 @@ const Header = () => {
 
   // Tries to toggle the navbar
   const collapseNavBar = (ev) => {
-    const currentElement = ev.target.name ? ev.target.name : '';
+    const currentElement = ev.target.name || '';
     // console.log ('Header: collapseNavBar.currentElement...', currentElement);
     let elToggler = document.getElementsByClassName('navbar-toggler');
     let elBar = document.getElementById('gd-navbar-content');
@@ -43,6 +43,7 @@ const Header = () => {
       // Update existing note
       if (noteId === v.noteId) {
         tempNotes.push({
+
           ...v,
           noteTitle: noteTitle,
           noteContent: utoa(noteContent),
@@ -54,6 +55,7 @@ const Header = () => {
     // console.log('Save: notes.EDIT...', tempNotes);
     saveLocalStorage('gd-notes', tempNotes);
     onSetIsSaved(true);
+    collapseNavBar(ev);
   };
 
   // console.log ('Header: isSaved...', isSaved);
@@ -82,7 +84,7 @@ const Header = () => {
               role="button"
               onClick={collapseNavBar}
             ><i className="fas fa-folder-open gd-nav-btn-icon"></i><span
-              className="pl-1 d-lg-inline d-none"
+              className="pl-1 d-sm-none d-lg-inline"
             >Open</span></Link>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
@@ -92,7 +94,7 @@ const Header = () => {
               disabled={!(noteId) || navbarLocked}
               onClick={handleSave}
             ><i className="fas fa-save gd-nav-btn-icon"></i><span
-              className="pl-1 d-lg-inline d-none"
+              className="pl-1 d-sm-none d-lg-inline"
             >Save</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0 gd-nav-btn-save-as">
@@ -102,7 +104,7 @@ const Header = () => {
               role="button"
               onClick={collapseNavBar}
             ><i className="far fa-save gd-nav-btn-icon"></i><span
-              className="pl-1 d-lg-inline d-none"
+              className="pl-1 d-sm-none d-lg-inline"
             >Save As</span></Link>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
@@ -112,7 +114,7 @@ const Header = () => {
               disabled={isEmpty || navbarLocked}
               onClick={() => { onNoteContentChange('', md5('')) }}
             ><i className="fas fa-broom gd-nav-btn-icon"></i><span
-              className="pl-1 d-lg-inline d-none"
+              className="pl-1 d-sm-none d-lg-inline"
             >Clear</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
@@ -122,7 +124,7 @@ const Header = () => {
               disabled={isEmpty || navbarLocked}
               onClick={() => onCopy('gd-note')}
             ><i className="fas fa-copy gd-nav-btn-icon"></i><span
-              className="pl-1 d-lg-inline d-none"
+              className="pl-1 d-sm-none d-lg-inline"
             >Copy</span></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
@@ -134,7 +136,7 @@ const Header = () => {
               aria-haspopup="true"
               aria-expanded="false"
             ><i className="fas fa-toolbox gd-nav-btn-icon"></i><span
-              className="pl-1 d-lg-inline d-none"
+              className="pl-1 d-sm-none d-lg-inline"
             >Tool Box</span></button>
             <div className="dropdown-menu dropdown-menu-right shadow mt-2" aria-labelledby="gd-dropdown-toolbox">
               <button
