@@ -2,7 +2,7 @@
   "name": "web-apps-notes",
   "version": "0.2.6",
   "private": true,
-  "homepage": "https://www.openapps.co.za/apps/web-apps-notes",
+  "homepage": "https://www.openapps.co.za/apps/notes",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "clipboard": "^2.0.4",
