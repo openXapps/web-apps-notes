@@ -21,31 +21,32 @@ const Header = () => {
     toggleNavbarLock
   } = React.useContext(NoteContext);
 
-  // Tries to toggle the navbar
-  const collapseNavBar = (ev) => {
+  /**
+   * Tries to toggle the navbar
+   * @param {any} ev Event object
+   * @param {string} navbarState Set navbar state (lock or unlock)
+   */
+  const collapseNavBar = (ev, navbarState) => {
     const currentElement = ev.target.name || '';
-    console.log('Header: collapseNavBar.currentElement...', currentElement);
+    // console.log('Header: collapseNavBar.currentElement...', currentElement);
     let elToggler = document.getElementsByClassName('navbar-toggler');
     let elBar = document.getElementById('gd-navbar-content');
     if (elBar.classList.contains('show')) {
       elToggler[0].click();
     }
-    if (!(currentElement === 'gd-navbar-save')) {
-      toggleNavbarLock();
-    };
+    // Set navbar state
+    toggleNavbarLock(navbarState);
     // Upload button will clear current note
     if (currentElement === 'gd-navbar-upload' && noteId) onNoteContentChange('', md5(''));
   };
 
   const handleSave = (ev) => {
-    ev.preventDefault();
     let savedNotes = getLocalStorage('gd-notes', null, null);
     let tempNotes = [];
     savedNotes.data.forEach((v) => {
       // Update existing note
       if (noteId === v.noteId) {
         tempNotes.push({
-
           ...v,
           noteTitle: noteTitle,
           noteContent: utoa(noteContent),
@@ -57,10 +58,20 @@ const Header = () => {
     // console.log('Save: notes.EDIT...', tempNotes);
     saveLocalStorage('gd-notes', tempNotes);
     onSetIsSaved(true);
-    collapseNavBar(ev);
+    collapseNavBar(ev, 'unlock');
   };
 
-  console.log('Header: isSaved........', isSaved);
+  const handleClear = (ev) => {
+    onNoteContentChange('', md5(''));
+    collapseNavBar(ev, 'unlock');
+  };
+
+  const handleCopy = (ev) => {
+    onCopy('gd-note');
+    collapseNavBar(ev, 'unlock');
+  };
+
+  // console.log('Header: isSaved........', isSaved);
   console.log('Header: navbarLocked...', navbarLocked);
 
   return (
@@ -70,6 +81,7 @@ const Header = () => {
       <button
         className="navbar-toggler px-1"
         type="button"
+        disabled={navbarLocked}
         data-toggle="collapse"
         data-target="#gd-navbar-content"
         aria-controls="gd-navbar-content"
@@ -85,7 +97,7 @@ const Header = () => {
               className={navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-primary w-100'}
               to="/open"
               role="button"
-              onClick={collapseNavBar}
+              onClick={(ev) => { collapseNavBar(ev, 'lock') }}
             ><i className="fas fa-folder-open gd-nav-btn-icon"></i><span
               className="pl-1 d-sm-none d-lg-inline"
             >Open</span></Link>
@@ -94,7 +106,6 @@ const Header = () => {
             <button
               className={!(noteId) || isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-info w-100'}
               type="button"
-              name="gd-navbar-save"
               disabled={!(noteId) || navbarLocked}
               onClick={handleSave}
             ><i className="fas fa-save gd-nav-btn-icon"></i><span
@@ -106,7 +117,7 @@ const Header = () => {
               className={isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-info w-100'}
               to={noteId ? `/save/${noteId}` : '/save'}
               role="button"
-              onClick={collapseNavBar}
+              onClick={(ev) => { collapseNavBar(ev, 'lock') }}
             ><i className="far fa-save gd-nav-btn-icon"></i><span
               className="pl-1 d-sm-none d-lg-inline"
             >Save As</span></Link>
@@ -116,7 +127,7 @@ const Header = () => {
               className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty || navbarLocked}
-              onClick={() => { onNoteContentChange('', md5('')) }}
+              onClick={handleClear}
             ><i className="fas fa-broom gd-nav-btn-icon"></i><span
               className="pl-1 d-sm-none d-lg-inline"
             >Clear</span></button>
@@ -126,7 +137,7 @@ const Header = () => {
               className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty || navbarLocked}
-              onClick={() => onCopy('gd-note')}
+              onClick={handleCopy}
             ><i className="fas fa-copy gd-nav-btn-icon"></i><span
               className="pl-1 d-sm-none d-lg-inline"
             >Copy</span></button>
@@ -167,14 +178,14 @@ const Header = () => {
                 className={navbarLocked ? 'dropdown-item disabled' : 'dropdown-item'}
                 to="/download"
                 role="button"
-                onClick={collapseNavBar}
+                onClick={(ev) => { collapseNavBar(ev, 'lock') }}
               >Download Notes</Link>
               <Link
                 className={navbarLocked ? 'dropdown-item disabled' : 'dropdown-item'}
                 to="/upload"
                 role="button"
                 name="gd-navbar-upload"
-                onClick={collapseNavBar}
+                onClick={(ev) => { collapseNavBar(ev, 'lock') }}
               >Upload Notes</Link>
             </div>
           </li>

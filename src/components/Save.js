@@ -49,7 +49,7 @@ const Save = () => {
     // Cleanup effect
     return () => {
       // Restore navbar state
-      toggleNavbarLock();
+      toggleNavbarLock('unlock');
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

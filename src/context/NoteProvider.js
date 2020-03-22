@@ -93,9 +93,14 @@ const NoteProvider = (props) => {
     }
   }
 
+  /**
+   * Toggle the navbar lock state
+   * @param {string} state Valid valus are lock or unlock
+   */
   const toggleNavbarLock = (state) => {
-    // console.log(`NoteProvider: toggleNavbarLock... ${state ? state : !navbarLocked}`);
-    state ? setNavbarLocked(state) : setNavbarLocked(!navbarLocked);
+    // console.log(`NoteProvider: toggleNavbarLock... ${state === 'lock' ? true : false}`);
+    if (!navbarLocked && state === 'lock') setNavbarLocked(true);
+    if (navbarLocked && state === 'unlock') setNavbarLocked(false);
   };
 
   return (

@@ -41,9 +41,11 @@ const Download = () => {
                 setCopyButton({ ...copyButtonDefault, isDisabled: false });
             }, 1000);
         }
+        // Clean up effect
         return () => {
             clipboard.destroy();
-            toggleNavbarLock();
+            // Restore navbar state
+            toggleNavbarLock('unlock');
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

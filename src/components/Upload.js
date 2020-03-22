@@ -49,8 +49,10 @@ const Upload = () => {
 
     React.useEffect(() => {
         textArea.current.focus();
+        // Clean up effect
         return () => {
-            toggleNavbarLock();
+            // Restore navbar state
+            toggleNavbarLock('unlock');
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
