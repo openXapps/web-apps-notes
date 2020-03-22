@@ -72,7 +72,7 @@ const Header = () => {
   };
 
   // console.log('Header: isSaved........', isSaved);
-  console.log('Header: navbarLocked...', navbarLocked);
+  // console.log('Header: navbarLocked...', navbarLocked);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
