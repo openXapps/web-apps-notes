@@ -24,13 +24,15 @@ const Header = () => {
   // Tries to toggle the navbar
   const collapseNavBar = (ev) => {
     const currentElement = ev.target.name || '';
-    // console.log ('Header: collapseNavBar.currentElement...', currentElement);
+    console.log('Header: collapseNavBar.currentElement...', currentElement);
     let elToggler = document.getElementsByClassName('navbar-toggler');
     let elBar = document.getElementById('gd-navbar-content');
     if (elBar.classList.contains('show')) {
       elToggler[0].click();
     }
-    toggleNavbarLock();
+    if (!(currentElement === 'gd-navbar-save')) {
+      toggleNavbarLock();
+    };
     // Upload button will clear current note
     if (currentElement === 'gd-navbar-upload' && noteId) onNoteContentChange('', md5(''));
   };
@@ -58,7 +60,8 @@ const Header = () => {
     collapseNavBar(ev);
   };
 
-  // console.log ('Header: isSaved...', isSaved);
+  console.log('Header: isSaved........', isSaved);
+  console.log('Header: navbarLocked...', navbarLocked);
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -91,6 +94,7 @@ const Header = () => {
             <button
               className={!(noteId) || isSaved || navbarLocked ? 'btn btn-outline-primary w-100 disabled' : 'btn btn-outline-info w-100'}
               type="button"
+              name="gd-navbar-save"
               disabled={!(noteId) || navbarLocked}
               onClick={handleSave}
             ><i className="fas fa-save gd-nav-btn-icon"></i><span
