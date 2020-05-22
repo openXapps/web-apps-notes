@@ -127,20 +127,20 @@ const Header = () => {
               className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty || navbarLocked}
-              onClick={handleClear}
-            ><i className="fas fa-broom gd-nav-btn-icon"></i><span
+              onClick={handleCopy}
+            ><i className="fas fa-copy gd-nav-btn-icon"></i><span
               className="pl-1 d-sm-none d-lg-inline"
-            >Clear</span></button>
+            >Copy</span></button>
           </li>
           <li className="nav-item ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
               className="btn btn-outline-primary w-100"
               type="button"
               disabled={isEmpty || navbarLocked}
-              onClick={handleCopy}
-            ><i className="fas fa-copy gd-nav-btn-icon"></i><span
+              onClick={handleClear}
+            ><i className="fas fa-broom gd-nav-btn-icon"></i><span
               className="pl-1 d-sm-none d-lg-inline"
-            >Copy</span></button>
+            >Clear</span></button>
           </li>
           <li className="nav-item dropdown ml-0 mt-2 ml-sm-2 mt-sm-0">
             <button
