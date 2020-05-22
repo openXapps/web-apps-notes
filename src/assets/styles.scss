@@ -1,6 +1,6 @@
 // Custom BS4 variables
 
-$primary: #6699cc;
+$primary: #789ec4;
 $secondary: #3a5c7f;
 $success: #2eb82e;
 $info: #e6e600;
@@ -67,6 +67,9 @@ $dropdown-bg: $light;
 // $dropdown-header-color:             $gray-600 !default;
 
 // Forms
+$input-bg: lighten($dark, 5%);
+$input-color: $primary;
+$input-placeholder-color: darken($info, 10%);
 // $input-bg:                              $white !default;
 // $input-disabled-bg:                     $gray-200 !default;
 // $input-color:                           $gray-700 !default;

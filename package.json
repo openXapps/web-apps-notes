@@ -16,6 +16,7 @@
     "uuid": "^3.4.0"
   },
   "scripts": {
+    "dev": "BROWSER=none react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

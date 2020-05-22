@@ -12,7 +12,7 @@ const NoteLabel = ({ index, noteTitle, noteDate }) => {
       <span
         data-id={index}
       >{noteTitle}</span> <span
-        className="d-none d-md-inline float-right text-light small" data-id={index}
+        className="d-none d-md-inline float-right small" data-id={index}
       >{noteDate}</span>
     </>
   );
