@@ -7,7 +7,7 @@ Quick Notes is a [PWA](https://facebook.github.io/create-react-app/docs/making-a
 * Clear the note text area with one button.
 * Toolbox menu to convert active note to upper or lower case. Trim option to remove excess white space.
 * Quick save button.
-* Staus bar
+* Status bar
   * Switch wrap On or Off.
   * Switch spell check On or Off.
   * Zoom text area In and Out.
@@ -49,13 +49,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 ## ToDo List
 
 * On the Open page (route)
-  * Add a back button near top area.
-  * Add note name search ability.
-  * Reorder note list by showing last 5 opened notes first.
+  * [ ] Add a back button near top area.
+  * [ ] Add note name search ability.
+  * [ ] Reorder note list by showing last 5 opened notes first.
 * In Toolbox menu
-  * Rename Download Notes to Export Notes.
-  * Add new Export Current Note option.
+  * [ ] Rename Download Notes to Export Notes.
+  * [ ] Add new Export Current Note option.
     * This will open the export page with the current note JSON text.
     * Now you can either copy the JSON or click new Share Note button.
     * Share Note should allow for a couple of messaging app options.
-* Add emoji picker to insert an emoji at cursor position.
+* [ ] Add emoji picker to insert an emoji at cursor position.
