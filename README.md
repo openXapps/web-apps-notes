@@ -7,6 +7,12 @@ Quick Notes is a [PWA](https://facebook.github.io/create-react-app/docs/making-a
 * Clear the note text area with one button.
 * Toolbox menu to convert active note to upper or lower case. Trim option to remove excess white space.
 * Quick save button.
+* Staus bar
+  * Switch wrap On or Off.
+  * Switch spell check On or Off.
+  * Zoom text area In and Out.
+  * Text area character count.
+  * Current font size.
 
 ## Getting Started
 
