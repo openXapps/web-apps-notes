@@ -43,13 +43,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 ## ToDo List
 
 * On the Open page (route)
- * Add a back button near top area.
- * Add note name search ability.
- * Reorder note list by showing last 5 opened notes first.
+  * Add a back button near top area.
+  * Add note name search ability.
+  * Reorder note list by showing last 5 opened notes first.
 * In Toolbox menu
- * Rename Download Notes to Export Notes.
- * Add new Export Current Note option.
-  * This will open the export page with the current note JSON text.
-  * Now you can either copy the JSON or click new Share Note button.
-  * Share Note should allow for a couple of messaging app options.
+  * Rename Download Notes to Export Notes.
+  * Add new Export Current Note option.
+    * This will open the export page with the current note JSON text.
+    * Now you can either copy the JSON or click new Share Note button.
+    * Share Note should allow for a couple of messaging app options.
 * Add emoji picker to insert an emoji at cursor position.
