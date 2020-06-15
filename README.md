@@ -21,10 +21,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Clone the project to your local machine.
 * In the project folder, run
-...
+```
 npm start
-...
-* Follow [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started) form more information.
+```
+* Follow [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started) for more information.
 
 ## Built With
 
