@@ -1,8 +1,10 @@
 # OpenApps - Quick Notes
 
-Quick Notes is a [PWA](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app) pet project, that allows you to take notes and save them to your local machine. You can export your current note list or import a backup note list. Notes are converted to base64 when saved to your local machine. Functionality highlights:
+Quick Notes is a [PWA](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app) pet project, that allows you to take notes and save them to your local machine.
+**Functionality highlights**
 * Save notes to your local machine.
-* Export and import notes.
+* Notes are converted to base64 when saved to your local machine.
+* Export and import notes as [JSON](https://www.json.org/).
 * Copy the active note with one button.
 * Clear the note text area with one button.
 * Toolbox menu to convert active note to upper or lower case. Trim option to remove excess white space.
@@ -11,8 +13,11 @@ Quick Notes is a [PWA](https://facebook.github.io/create-react-app/docs/making-a
   * Switch wrap On or Off.
   * Switch spell check On or Off.
   * Zoom text area In and Out.
-  * Text area character count.
+  * Text area character count. Note content limit is set to 1 million charters.
   * Current font size.
+* Quick Notes is a 100% mobile friendly.
+
+This web app is hosted at [OpenApps](https://www.openapps.co.za/apps/notes/).
 
 ## Getting Started
 
@@ -55,7 +60,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 * In Toolbox menu
   * [ ] Rename Download Notes to Export Notes.
   * [ ] Add new Export Current Note option.
-    * This will open the export page with the current note JSON text.
+    * This will open the export page with the current note in JSON format.
     * Now you can either copy the JSON or click new Share Note button.
     * Share Note should allow for a couple of messaging app options.
 * [ ] Add emoji picker to insert an emoji at cursor position.
